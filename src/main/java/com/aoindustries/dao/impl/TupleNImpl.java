@@ -43,6 +43,8 @@ public class TupleNImpl<
 	private final C[] columns;
 
 	@SafeVarargs
+	// Java 1.8 compiler still giving warning even with @SafeVarargs
+	@SuppressWarnings({"unchecked", "varargs"})
 	public TupleNImpl(Collator collator, C ... columns) {
 		super(collator);
 		this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
