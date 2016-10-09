@@ -30,73 +30,73 @@ public final class AggregateReason
 	extends AbstractReason
 {
 
-    private final int count;
-    private final String singularPrefix;
-    private final String pluralPrefix;
-    private final String singularSuffix;
-    private final String pluralSuffix;
+	private final int count;
+	private final String singularPrefix;
+	private final String pluralPrefix;
+	private final String singularSuffix;
+	private final String pluralSuffix;
 
-    AggregateReason(int count, String singularPrefix, String pluralPrefix, String singularSuffix, String pluralSuffix) {
-        this.count = count;
-        this.singularPrefix = singularPrefix;
-        this.pluralPrefix = pluralPrefix;
-        this.singularSuffix = singularSuffix;
-        this.pluralSuffix = pluralSuffix;
-    }
+	AggregateReason(int count, String singularPrefix, String pluralPrefix, String singularSuffix, String pluralSuffix) {
+		this.count = count;
+		this.singularPrefix = singularPrefix;
+		this.pluralPrefix = pluralPrefix;
+		this.singularSuffix = singularSuffix;
+		this.pluralSuffix = pluralSuffix;
+	}
 
-    @Override
-    public String toString() {
-        if(count==1) return singularPrefix+"1"+singularSuffix;
-        return pluralPrefix+count+pluralSuffix;
-    }
+	@Override
+	public String toString() {
+		if(count==1) return singularPrefix+"1"+singularSuffix;
+		return pluralPrefix+count+pluralSuffix;
+	}
 
-    public int getCount() {
-        return count;
-    }
+	public int getCount() {
+		return count;
+	}
 
-    public String getSingularPrefix() {
-        return singularPrefix;
-    }
+	public String getSingularPrefix() {
+		return singularPrefix;
+	}
 
-    public String getPluralPrefix() {
-        return pluralPrefix;
-    }
+	public String getPluralPrefix() {
+		return pluralPrefix;
+	}
 
-    public String getSingularSuffix() {
-        return singularSuffix;
-    }
+	public String getSingularSuffix() {
+		return singularSuffix;
+	}
 
-    public String getPluralSuffix() {
-        return pluralSuffix;
-    }
+	public String getPluralSuffix() {
+		return pluralSuffix;
+	}
 
-    @Override
-    public AggregateReason merge(Reason other) {
-        if(!(other instanceof AggregateReason)) return null;
-        AggregateReason otherAggregateReason = (AggregateReason)other;
-        // Must have the same text descriptions
-        if(
-            singularPrefix.equals(otherAggregateReason.singularPrefix)
-            && pluralPrefix.equals(otherAggregateReason.pluralPrefix)
-            && singularSuffix.equals(otherAggregateReason.singularSuffix)
-            && pluralSuffix.equals(otherAggregateReason.pluralSuffix)
-        ) {
-            return new AggregateReason(count + otherAggregateReason.count, singularPrefix, pluralPrefix, singularSuffix, pluralSuffix);
-        }
-        return null;
-    }
+	@Override
+	public AggregateReason merge(Reason other) {
+		if(!(other instanceof AggregateReason)) return null;
+		AggregateReason otherAggregateReason = (AggregateReason)other;
+		// Must have the same text descriptions
+		if(
+			singularPrefix.equals(otherAggregateReason.singularPrefix)
+			&& pluralPrefix.equals(otherAggregateReason.pluralPrefix)
+			&& singularSuffix.equals(otherAggregateReason.singularSuffix)
+			&& pluralSuffix.equals(otherAggregateReason.pluralSuffix)
+		) {
+			return new AggregateReason(count + otherAggregateReason.count, singularPrefix, pluralPrefix, singularSuffix, pluralSuffix);
+		}
+		return null;
+	}
 
-    @Override
-    public int compareTo(Reason other) {
-        if(other instanceof AggregateReason) {
-            AggregateReason otherAggregateReason = (AggregateReason)other;
-            // Descending by count first
-            if(count<otherAggregateReason.count) return 1;
-            if(count>otherAggregateReason.count) return -1;
-            // Sort by lexical display
-            return Collator.getInstance(ThreadLocale.get()).compare(toString(), otherAggregateReason.toString());
-        } else {
-            return 1; // Aggregate reasons after single
-        }
-    }
+	@Override
+	public int compareTo(Reason other) {
+		if(other instanceof AggregateReason) {
+			AggregateReason otherAggregateReason = (AggregateReason)other;
+			// Descending by count first
+			if(count<otherAggregateReason.count) return 1;
+			if(count>otherAggregateReason.count) return -1;
+			// Sort by lexical display
+			return Collator.getInstance(ThreadLocale.get()).compare(toString(), otherAggregateReason.toString());
+		} else {
+			return 1; // Aggregate reasons after single
+		}
+	}
 }

@@ -36,78 +36,78 @@ import java.util.Random;
  */
 public class Encryption {
 
-    private Encryption() {
-    }
+	private Encryption() {
+	}
 
-    private static String hexEncode(byte[] bytes) {
-        int len = bytes.length;
-        StringBuilder sb = new StringBuilder(len*2);
-        for(int c=0; c<len; c++) {
-            int b = bytes[c];
-            sb.append(hexChars[(b>>4)&0xf]);
-            sb.append(hexChars[b&0xf]);
-        }
-        return sb.toString();
-    }
+	private static String hexEncode(byte[] bytes) {
+		int len = bytes.length;
+		StringBuilder sb = new StringBuilder(len*2);
+		for(int c=0; c<len; c++) {
+			int b = bytes[c];
+			sb.append(hexChars[(b>>4)&0xf]);
+			sb.append(hexChars[b&0xf]);
+		}
+		return sb.toString();
+	}
 
-    /**
-     * Performs a one-way hash of the plaintext value using SHA-1.
-     *
-     * @exception  WrappedException  if any problem occurs.
+	/**
+	 * Performs a one-way hash of the plaintext value using SHA-1.
+	 *
+	 * @exception  WrappedException  if any problem occurs.
 	 * 
 	 * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
 	 * 
 	 * @see  HashedPassword for proper password hashing
 	 * @see  HashedKey for SHA-256 hashing
-     */
-    @Deprecated
-    public static String hash(String plaintext) throws WrappedException {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            md.update(plaintext.getBytes("UTF-8"));
-            return hexEncode(md.digest());
-        } catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            throw new WrappedException(e);
-        }
-    }
+	 */
+	@Deprecated
+	public static String hash(String plaintext) throws WrappedException {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			md.update(plaintext.getBytes("UTF-8"));
+			return hexEncode(md.digest());
+		} catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			throw new WrappedException(e);
+		}
+	}
 
-    private static final Random random = new SecureRandom();
+	private static final Random random = new SecureRandom();
 
-    /**
-     * Gets the secure random.
-     */
-    private static Random getRandom() {
-        return random;
-    }
+	/**
+	 * Gets the secure random.
+	 */
+	private static Random getRandom() {
+		return random;
+	}
 
-    private static final char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+	private static final char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    /**
-     * Generates a random key.
-     */
-    public static String generateKey() {
-        byte[] bytes = new byte[32];
-        getRandom().nextBytes(bytes);
-        char[] chars = new char[64];
-        for(int c=0;c<32;c++) {
-            byte b = bytes[c];
-            chars[c*2]=hexChars[(b&255)>>>4];
-            chars[c*2+1]=hexChars[b&15];
-        }
-        return new String(chars);
-    }
+	/**
+	 * Generates a random key.
+	 */
+	public static String generateKey() {
+		byte[] bytes = new byte[32];
+		getRandom().nextBytes(bytes);
+		char[] chars = new char[64];
+		for(int c=0;c<32;c++) {
+			byte b = bytes[c];
+			chars[c*2]=hexChars[(b&255)>>>4];
+			chars[c*2+1]=hexChars[b&15];
+		}
+		return new String(chars);
+	}
 
-    /*
-    public static void main(String[] args) {
-        //args = new String[] {"test"};
-        if(args.length==0) {
-            System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
-            System.exit(1);
-        } else {
-            for(String arg : args) {
-                System.out.println(arg+'\t'+hash(arg));
-            }
-        }
-    }
-     */
+	/*
+	public static void main(String[] args) {
+		//args = new String[] {"test"};
+		if(args.length==0) {
+			System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
+			System.exit(1);
+		} else {
+			for(String arg : args) {
+				System.out.println(arg+'\t'+hash(arg));
+			}
+		}
+	}
+	 */
 }

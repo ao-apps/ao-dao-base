@@ -50,7 +50,7 @@ public class Tuple3Impl<
 		this.column1 = column1;
 		this.column2 = column2;
 		this.column3 = column3;
-    }
+	}
 
 	@Override
 	public Comparable<?>[] getColumns() {
@@ -60,17 +60,17 @@ public class Tuple3Impl<
 			column3
 		};
 	}
-	
+
 	@Override
 	public C1 getColumn1() {
 		return column1;
 	}
-	
+
 	@Override
 	public C2 getColumn2() {
 		return column2;
 	}
-	
+
 	@Override
 	public C3 getColumn3() {
 		return column3;

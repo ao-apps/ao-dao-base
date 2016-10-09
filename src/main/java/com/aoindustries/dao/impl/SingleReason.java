@@ -30,37 +30,37 @@ public final class SingleReason
 	extends AbstractReason
 {
 
-    private final String reason;
+	private final String reason;
 
-    public SingleReason(String reason) {
-        this.reason = reason;
-    }
+	public SingleReason(String reason) {
+		this.reason = reason;
+	}
 
-    @Override
-    public String toString() {
-        return reason;
-    }
+	@Override
+	public String toString() {
+		return reason;
+	}
 
-    public String getReason() {
-        return reason;
-    }
+	public String getReason() {
+		return reason;
+	}
 
-    @Override
-    public SingleReason merge(Reason other) {
-        if(!(other instanceof SingleReason)) return null;
-        SingleReason otherSingleReason = (SingleReason)other;
-        // Must have the same reason
-        if(reason.equals(otherSingleReason.reason)) return this;
-        return null;
-    }
+	@Override
+	public SingleReason merge(Reason other) {
+		if(!(other instanceof SingleReason)) return null;
+		SingleReason otherSingleReason = (SingleReason)other;
+		// Must have the same reason
+		if(reason.equals(otherSingleReason.reason)) return this;
+		return null;
+	}
 
-    @Override
-    public int compareTo(Reason other) {
-        if(other instanceof SingleReason) {
-            SingleReason otherSingleReason = (SingleReason)other;
-            return Collator.getInstance(ThreadLocale.get()).compare(reason, otherSingleReason.reason);
-        } else {
-            return -1; // Single reasons before aggregate
-        }
-    }
+	@Override
+	public int compareTo(Reason other) {
+		if(other instanceof SingleReason) {
+			SingleReason otherSingleReason = (SingleReason)other;
+			return Collator.getInstance(ThreadLocale.get()).compare(reason, otherSingleReason.reason);
+		} else {
+			return -1; // Single reasons before aggregate
+		}
+	}
 }

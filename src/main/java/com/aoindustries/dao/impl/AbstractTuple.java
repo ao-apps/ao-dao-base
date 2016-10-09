@@ -41,7 +41,7 @@ abstract public class AbstractTuple<
 
 	protected AbstractTuple(Collator collator) {
 		this.collator = collator;
-    }
+	}
 
 	@Override
 	abstract public Comparable<?>[] getColumns();
@@ -71,8 +71,8 @@ abstract public class AbstractTuple<
 		return Arrays.hashCode(getColumns());
 	}
 
-    @Override
-    public int compareTo(T o) {
+	@Override
+	public int compareTo(T o) {
 		Comparable<?>[] columns1 = getColumns();
 		Comparable<?>[] columns2 = o.getColumns();
 		int len1 = columns1.length;
@@ -109,5 +109,5 @@ abstract public class AbstractTuple<
 		if(len2>minLen) return -1;
 		if(len1>minLen) return 1;
 		return 0;
-    }
+	}
 }

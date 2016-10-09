@@ -42,16 +42,16 @@ public class EmptyTable<
 	implements Table<K,R>
 {
 
-    private final Model model;
+	private final Model model;
 
 	protected EmptyTable(Model model) {
-        this.model = model;
-    }
+		this.model = model;
+	}
 
-    @Override
-    public Model getModel() {
-        return model;
-    }
+	@Override
+	public Model getModel() {
+		return model;
+	}
 
 	@Override
 	public Map<K, ? extends R> getMap() {
@@ -64,17 +64,17 @@ public class EmptyTable<
 	}
 
 	@Override
-    public Set<? extends R> getUnsortedRows() {
+	public Set<? extends R> getUnsortedRows() {
 		return Collections.emptySet();
-    }
+	}
 
-    @Override
-    public SortedSet<? extends R> getRows() {
+	@Override
+	public SortedSet<? extends R> getRows() {
 		return Collections.emptySortedSet();
-    }
+	}
 
-    @Override
-    public R get(K key) throws NoRowException {
+	@Override
+	public R get(K key) throws NoRowException {
 		throw new NoRowException(getName()+" not found: "+key);
-    }
+	}
 }

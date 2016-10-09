@@ -45,7 +45,7 @@ public class TupleNImpl<
 	public TupleNImpl(Collator collator, C ... columns) {
 		super(collator);
 		this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
-    }
+	}
 
 	@Override
 	public C[] getColumns() {

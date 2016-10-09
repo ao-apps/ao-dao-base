@@ -32,67 +32,67 @@ abstract public class AbstractRow<
 	implements Row<K,R>
 {
 
-    private final Model model;
-    private final Class<R> clazz;
+	private final Model model;
+	private final Class<R> clazz;
 
-    protected AbstractRow(
-        Model model,
-        Class<R> clazz
-    ) {
-        this.model = model;
-        this.clazz = clazz;
-    }
+	protected AbstractRow(
+		Model model,
+		Class<R> clazz
+	) {
+		this.model = model;
+		this.clazz = clazz;
+	}
 
-    /**
-     * The default String representation is the key value.
-     */
-    @Override
-    public String toString() {
-        return getKey().toString();
-    }
+	/**
+	 * The default String representation is the key value.
+	 */
+	@Override
+	public String toString() {
+		return getKey().toString();
+	}
 
-    /**
-     * The default hashCode is based on the key value.
-     */
-    @Override
-    public int hashCode() {
-        return getKey().hashCode();
-    }
+	/**
+	 * The default hashCode is based on the key value.
+	 */
+	@Override
+	public int hashCode() {
+		return getKey().hashCode();
+	}
 
-    /**
-     * By default equality is based on same model, compatible class, and equal canonical key objects.
-     */
-    @Override
-    public boolean equals(Object o) {
+	/**
+	 * By default equality is based on same model, compatible class, and equal canonical key objects.
+	 */
+	@Override
+	public boolean equals(Object o) {
 		if(!(o instanceof AbstractRow<?,?>)) return false;
-        if(!clazz.isInstance(o)) return false;
-        AbstractRow<K,?> other = clazz.cast(o);
-        if(model!=other.model) return false;
-        K canonicalKey1 = getTable().canonicalize(getKey());
-        K canonicalKey2 = other.getTable().canonicalize(other.getKey());
-        return canonicalKey1.equals(canonicalKey2);
-    }
+		if(!clazz.isInstance(o)) return false;
+		AbstractRow<K,?> other = clazz.cast(o);
+		if(model!=other.model) return false;
+		K canonicalKey1 = getTable().canonicalize(getKey());
+		K canonicalKey2 = other.getTable().canonicalize(other.getKey());
+		return canonicalKey1.equals(canonicalKey2);
+	}
 
-    /**
-     * The default ordering is based on key comparison.  If both keys
-     * are Strings, will use the model collator.
-     */
-    //@Override
-    public int compareTo(R o) {
-        K key1 = getKey();
-        K key2 = o.getKey();
-        if(key1.getClass()==String.class && key2.getClass()==String.class) {
-            String s1 = key1.toString();
-            String s2 = key2.toString();
-            // TODO: If both strings begin with a number, sort by that first
-            // TODO: This is for lot numbers, such as 1A, 1B, 2, 3, 10, 20, 100A
-            return s1.equals(s2) ? 0 : getModel().getCollator().compare(s1, s2);
-        } else {
-            return key1.compareTo(key2);
-        }
-    }
+	/**
+	 * The default ordering is based on key comparison.  If both keys
+	 * are Strings, will use the model collator.
+	 */
+	//@Override
+	public int compareTo(R o) {
+		K key1 = getKey();
+		K key2 = o.getKey();
+		if(key1.getClass()==String.class && key2.getClass()==String.class) {
+			String s1 = key1.toString();
+			String s2 = key2.toString();
+			// TODO: If both strings begin with a number, sort by that first
+			// TODO: This is for lot numbers, such as 1A, 1B, 2, 3, 10, 20, 100A
+			return s1.equals(s2) ? 0 : getModel().getCollator().compare(s1, s2);
+		} else {
+			return key1.compareTo(key2);
+		}
+	}
 
-    protected Model getModel() {
-        return model;
-    }
+	protected Model getModel() {
+		return model;
+	}
 }

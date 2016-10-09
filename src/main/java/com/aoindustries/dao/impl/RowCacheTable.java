@@ -44,115 +44,115 @@ abstract public class RowCacheTable<
 	extends AbstractTable<K,R>
 {
 
-    protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
+	protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
 
-    private final ThreadLocal<SortedSet<? extends R>> sortedRowsCache = new ThreadLocal<>();
+	private final ThreadLocal<SortedSet<? extends R>> sortedRowsCache = new ThreadLocal<>();
 
-    private final ThreadLocal<Map<K,R>> rowCache = new ThreadLocal<Map<K,R>>() {
-        @Override
-        protected Map<K,R> initialValue() {
-            return new HashMap<>();
-        }
-    };
+	private final ThreadLocal<Map<K,R>> rowCache = new ThreadLocal<Map<K,R>>() {
+		@Override
+		protected Map<K,R> initialValue() {
+			return new HashMap<>();
+		}
+	};
 
-    protected RowCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
-        super(keyClass, rowClass, model);
-    }
+	protected RowCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
+		super(keyClass, rowClass, model);
+	}
 
-    private void clearCaches0() {
-        unsortedRowsCache.remove();
-        sortedRowsCache.remove();
-        rowCache.get().clear();
-    }
+	private void clearCaches0() {
+		unsortedRowsCache.remove();
+		sortedRowsCache.remove();
+		rowCache.get().clear();
+	}
 
-    /**
-     * Clears all caches for the current thread.
-     */
-    @Override
-    public void clearCaches() {
-        super.clearCaches();
-        clearCaches0();
-    }
+	/**
+	 * Clears all caches for the current thread.
+	 */
+	@Override
+	public void clearCaches() {
+		super.clearCaches();
+		clearCaches0();
+	}
 
-    /**
-     * When the table is updated, all caches are cleared for the current thread.
-     */
-    @Override
-    public void tableUpdated() {
-        super.tableUpdated();
-        clearCaches0();
-    }
+	/**
+	 * When the table is updated, all caches are cleared for the current thread.
+	 */
+	@Override
+	public void tableUpdated() {
+		super.tableUpdated();
+		clearCaches0();
+	}
 
-    @Override
-    public Set<? extends R> getUnsortedRows() throws SQLException {
-        Set<? extends R> rows = unsortedRowsCache.get();
-        if(rows==null) {
-            rows = Collections.unmodifiableSet(getRowsNoCache());
+	@Override
+	public Set<? extends R> getUnsortedRows() throws SQLException {
+		Set<? extends R> rows = unsortedRowsCache.get();
+		if(rows==null) {
+			rows = Collections.unmodifiableSet(getRowsNoCache());
 
-            // Populate rowCache fully
-            Map<K,R> cache = rowCache.get();
-            cache.clear();
-            for(R row : rows) if(cache.put(canonicalize(row.getKey()), row)!=null) throw new SQLException("Duplicate key: "+row.getKey());
+			// Populate rowCache fully
+			Map<K,R> cache = rowCache.get();
+			cache.clear();
+			for(R row : rows) if(cache.put(canonicalize(row.getKey()), row)!=null) throw new SQLException("Duplicate key: "+row.getKey());
 
-            allRowsLoaded(rows);
-            unsortedRowsCache.set(rows);
-        }
-        return rows;
-    }
+			allRowsLoaded(rows);
+			unsortedRowsCache.set(rows);
+		}
+		return rows;
+	}
 
-    /**
-     * Called when all rows have been loaded at once.  This allows for subclasses
-     * to populate any views or caches in a more efficient manner than row-by-row.
-     *
-     * This default implementation does nothing.
-     */
-    protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {
-        // Does nothing.
-    }
+	/**
+	 * Called when all rows have been loaded at once.  This allows for subclasses
+	 * to populate any views or caches in a more efficient manner than row-by-row.
+	 *
+	 * This default implementation does nothing.
+	 */
+	protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {
+		// Does nothing.
+	}
 
-    @Override
-    public SortedSet<? extends R> getRows() throws SQLException {
-        SortedSet<? extends R> rows = sortedRowsCache.get();
-        if(rows==null) {
-            rows = Collections.unmodifiableSortedSet(new TreeSet<R>(getUnsortedRows()));
-            sortedRowsCache.set(rows);
-        }
-        return rows;
-    }
+	@Override
+	public SortedSet<? extends R> getRows() throws SQLException {
+		SortedSet<? extends R> rows = sortedRowsCache.get();
+		if(rows==null) {
+			rows = Collections.unmodifiableSortedSet(new TreeSet<R>(getUnsortedRows()));
+			sortedRowsCache.set(rows);
+		}
+		return rows;
+	}
 
-    @Override
-    public R get(final K key) throws NoRowException, SQLException {
-        final K canonicalKey = canonicalize(key);
-        Map<K,R> cache = rowCache.get();
-        if(cache.containsKey(canonicalKey)) {
-            R row = cache.get(canonicalKey);
-            if(row==null) throw new NoRowException(getName()+" not found: "+key);
-            return row;
-        }
+	@Override
+	public R get(final K key) throws NoRowException, SQLException {
+		final K canonicalKey = canonicalize(key);
+		Map<K,R> cache = rowCache.get();
+		if(cache.containsKey(canonicalKey)) {
+			R row = cache.get(canonicalKey);
+			if(row==null) throw new NoRowException(getName()+" not found: "+key);
+			return row;
+		}
 
-        // Doesn't exist when all rows have been loaded
-        if(unsortedRowsCache.get()!=null) throw new NoRowException(getName()+" not found: "+key);
+		// Doesn't exist when all rows have been loaded
+		if(unsortedRowsCache.get()!=null) throw new NoRowException(getName()+" not found: "+key);
 
-        // Try single row query - cache hits and misses
-        try {
-            R row = getNoCache(canonicalKey);
-            addToCache(canonicalKey, row);
-            return row;
-        } catch(NoRowException err) {
-            cache.put(canonicalKey, null);
-            throw new NoRowException(getName()+" not found: "+key, err);
-        }
-    }
+		// Try single row query - cache hits and misses
+		try {
+			R row = getNoCache(canonicalKey);
+			addToCache(canonicalKey, row);
+			return row;
+		} catch(NoRowException err) {
+			cache.put(canonicalKey, null);
+			throw new NoRowException(getName()+" not found: "+key, err);
+		}
+	}
 
-    /**
-     * Adds a single object to the cache.
-     */
-    protected void addToCache(K canonicalKey, R row) {
-        assert ObjectUtils.equals(canonicalize(row.getKey()), canonicalKey);
-        rowCache.get().put(canonicalKey, row);
-    }
+	/**
+	 * Adds a single object to the cache.
+	 */
+	protected void addToCache(K canonicalKey, R row) {
+		assert ObjectUtils.equals(canonicalize(row.getKey()), canonicalKey);
+		rowCache.get().put(canonicalKey, row);
+	}
 
-    abstract protected R getNoCache(K canonicalKey) throws NoRowException, SQLException;
+	abstract protected R getNoCache(K canonicalKey) throws NoRowException, SQLException;
 
-    abstract protected Set<? extends R> getRowsNoCache() throws SQLException;
+	abstract protected Set<? extends R> getRowsNoCache() throws SQLException;
 }

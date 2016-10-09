@@ -32,16 +32,16 @@ abstract public class AbstractModel
 	implements Model
 {
 
-    /**
-     * A single Collator for shared use.
-     */
-    private static final Collator collator = Collator.getInstance();
+	/**
+	 * A single Collator for shared use.
+	 */
+	private static final Collator collator = Collator.getInstance();
 
-    /**
-     * By default, sorts in the system locale.
-     */
-    @Override
-    public Collator getCollator() {
-        return collator;
-    }
+	/**
+	 * By default, sorts in the system locale.
+	 */
+	@Override
+	public Collator getCollator() {
+		return collator;
+	}
 }

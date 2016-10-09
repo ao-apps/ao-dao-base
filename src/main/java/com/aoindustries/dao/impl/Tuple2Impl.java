@@ -47,7 +47,7 @@ public class Tuple2Impl<
 		super(collator);
 		this.column1 = column1;
 		this.column2 = column2;
-    }
+	}
 
 	@Override
 	public Comparable<?>[] getColumns() {
@@ -56,12 +56,12 @@ public class Tuple2Impl<
 			column2
 		};
 	}
-	
+
 	@Override
 	public C1 getColumn1() {
 		return column1;
 	}
-	
+
 	@Override
 	public C2 getColumn2() {
 		return column2;
