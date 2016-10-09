@@ -60,6 +60,7 @@ public class Encryption {
 	 * @see  HashedPassword for proper password hashing
 	 * @see  HashedKey for SHA-256 hashing
      */
+    @Deprecated
     public static String hash(String plaintext) throws WrappedException {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
