@@ -36,12 +36,11 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>jar</packaging>
 
 	<properties>
-		<bookPath>/${project.parent.artifactId}/base</bookPath>
 		<shortTitle>Base</shortTitle>
 	</properties>
 
 	<name>AO DAO Base</name>
-	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://aoindustries.com/${project.parent.artifactId}/base/</url>
 	<description>Simple data access objects framework base for implementations.</description>
 	<inceptionYear>2011</inceptionYear>
 
