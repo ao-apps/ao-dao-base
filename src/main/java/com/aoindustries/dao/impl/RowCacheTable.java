@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,11 +25,11 @@ package com.aoindustries.dao.impl;
 import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dbc.NoRowException;
-import com.aoindustries.lang.ObjectUtils;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -148,7 +148,7 @@ abstract public class RowCacheTable<
 	 * Adds a single object to the cache.
 	 */
 	protected void addToCache(K canonicalKey, R row) {
-		assert ObjectUtils.equals(canonicalize(row.getKey()), canonicalKey);
+		assert Objects.equals(canonicalize(row.getKey()), canonicalKey);
 		rowCache.get().put(canonicalKey, row);
 	}
 
