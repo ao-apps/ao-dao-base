@@ -29,7 +29,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 		<relativePath>../../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>ao-dao-base</artifactId><version>1.0.4-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>ao-dao-base</artifactId><version>1.0.4</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -52,7 +52,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 		<connection>scm:git:git://github.com/aoindustries/${project.artifactId}.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/${project.artifactId}.git</developerConnection>
 		<url>https://github.com/aoindustries/${project.artifactId}</url>
-		<tag>HEAD</tag>
+		<tag>ao-dao-base-1.0.4</tag>
 	</scm>
 
 	<profiles>
