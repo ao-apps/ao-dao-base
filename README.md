@@ -27,7 +27,7 @@ Simple data access objects framework base for implementations.
 * [Project Home](https://aoindustries.com/ao-dao/base/)
 * [Changelog](https://aoindustries.com/ao-dao/base/changelog)
 * [API Docs](https://aoindustries.com/ao-dao/base/apidocs/)
-* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.aoindustries%22%20AND%20a:%22ao-dao-base%22)
+* [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-dao-base)
 * [GitHub](https://github.com/aoindustries/ao-dao-base)
 
 ## Contact Us
