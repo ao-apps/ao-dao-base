@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,7 +26,7 @@ import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.NoRowException;
-import com.aoindustries.util.WrappedException;
+import com.aoindustries.exception.WrappedException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Comparator;
