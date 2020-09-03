@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -67,7 +67,9 @@ public abstract class AbstractReason
 	 * @return  the (possibly) new list.
 	 */
 	public static List<AbstractReason> addReasons(List<AbstractReason> reasons, List<AbstractReason> newReasons) {
-		for(AbstractReason newReason : newReasons) reasons = addReason(reasons, newReason);
+		for(AbstractReason newReason : newReasons) {
+			reasons = addReason(reasons, newReason);
+		}
 		return reasons;
 	}
 

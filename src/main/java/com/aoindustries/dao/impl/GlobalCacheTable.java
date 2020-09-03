@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -105,6 +105,7 @@ abstract public class GlobalCacheTable<
 	 *
 	 * This default implementation does nothing.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {
 		// Does nothing.
 	}
@@ -127,7 +128,11 @@ abstract public class GlobalCacheTable<
 			if(!rowCacheLoaded) {
 				// Load all rows in a single query
 				rowCache.clear();
-				for(R row : getUnsortedRows()) if(rowCache.put(canonicalize(row.getKey()), row)!=null) throw new SQLException("Duplicate key: "+row.getKey());
+				for(R row : getUnsortedRows()) {
+					if(rowCache.put(canonicalize(row.getKey()), row) != null) {
+						throw new SQLException("Duplicate key: " + row.getKey());
+					}
+				}
 				rowCacheLoaded = true;
 			}
 			R row = rowCache.get(canonicalize(key));

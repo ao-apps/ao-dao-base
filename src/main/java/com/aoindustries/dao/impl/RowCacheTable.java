@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -92,7 +92,11 @@ abstract public class RowCacheTable<
 			// Populate rowCache fully
 			Map<K,R> cache = rowCache.get();
 			cache.clear();
-			for(R row : rows) if(cache.put(canonicalize(row.getKey()), row)!=null) throw new SQLException("Duplicate key: "+row.getKey());
+			for(R row : rows) {
+				if(cache.put(canonicalize(row.getKey()), row) != null) {
+					throw new SQLException("Duplicate key: " + row.getKey());
+				}
+			}
 
 			allRowsLoaded(rows);
 			unsortedRowsCache.set(rows);
@@ -106,6 +110,7 @@ abstract public class RowCacheTable<
 	 *
 	 * This default implementation does nothing.
 	 */
+	@SuppressWarnings("NoopMethodInAbstractClass")
 	protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {
 		// Does nothing.
 	}

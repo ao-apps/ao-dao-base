@@ -59,8 +59,9 @@ abstract public class AbstractTable<
 		}
 
 		@Override
+		@SuppressWarnings("element-type-mismatch")
 		public boolean containsKey(Object key) {
-			return get(key)!=null;
+			return get(key) != null;
 		}
 
 		@Override
@@ -194,11 +195,13 @@ abstract public class AbstractTable<
 	}
 
 	@Override
+	@SuppressWarnings("ReturnOfCollectionOrArrayField")
 	public Map<K,? extends R> getMap() {
 		return map;
 	}
 
 	@Override
+	@SuppressWarnings("ReturnOfCollectionOrArrayField")
 	public SortedMap<K,? extends R> getSortedMap() {
 		return sortedMap;
 	}
