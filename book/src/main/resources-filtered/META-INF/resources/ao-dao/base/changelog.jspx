@@ -37,7 +37,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:25:52-0500"
-		dateModified="2020-03-28T17:58:34-05:00"
+		dateModified="2020-11-29T23:10:47-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-dao-base:pom.version}" />
@@ -52,17 +52,26 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			>
-				<ul>
-					<li>
-						Now sorting with <ao:a rel="nofollow" href="@{javadoc.link.javase}java/util/Comparator.html">Comparator</ao:a>
-						instead of <ao:a rel="nofollow" href="@{javadoc.link.javase}java/text/Collator.html">Collator</ao:a>.
-						Defaults to using <ao:a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/text/SmartComparator.html">SmartComparator</ao:a>
-						in the system locale.
-					</li>
-				</ul>
-			</changelog:release>
+			/>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="2.0.0"
+			datePublished="2020-11-29T23:10:47-06:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>
+					Now sorting with <ao:a rel="nofollow" href="@{javadoc.link.javase}java/util/Comparator.html">Comparator</ao:a>
+					instead of <ao:a rel="nofollow" href="@{javadoc.link.javase}java/text/Collator.html">Collator</ao:a>.
+					Defaults to using <ao:a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/text/SmartComparator.html">SmartComparator</ao:a>
+					in the system locale.
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
