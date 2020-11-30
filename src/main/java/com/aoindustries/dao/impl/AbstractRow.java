@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -75,7 +75,7 @@ abstract public class AbstractRow<
 
 	/**
 	 * The default ordering is based on key comparison.  If both keys
-	 * are Strings, will use the model collator.
+	 * are Strings, will use {@linkplain Model#getComparator() the model comparator}.
 	 */
 	//@Override
 	public int compareTo(R o) {
@@ -84,9 +84,7 @@ abstract public class AbstractRow<
 		if(key1.getClass()==String.class && key2.getClass()==String.class) {
 			String s1 = key1.toString();
 			String s2 = key2.toString();
-			// TODO: If both strings begin with a number, sort by that first
-			// TODO: This is for lot numbers, such as 1A, 1B, 2, 3, 10, 20, 100A
-			return s1.equals(s2) ? 0 : getModel().getCollator().compare(s1, s2);
+			return s1.equals(s2) ? 0 : getModel().getComparator().compare(s1, s2);
 		} else {
 			return key1.compareTo(key2);
 		}

@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,8 @@
 package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Model;
-import java.text.Collator;
+import com.aoindustries.text.SmartComparator;
+import java.util.Comparator;
 
 /**
  * A base implementation of <code>DaoDatabase</code>.
@@ -33,15 +34,15 @@ abstract public class AbstractModel
 {
 
 	/**
-	 * A single Collator for shared use.
+	 * A single Comparator for shared use.
 	 */
-	private static final Collator collator = Collator.getInstance();
+	private static final Comparator<? super String> comparator = new SmartComparator();
 
 	/**
-	 * By default, sorts in the system locale.
+	 * By default, sorts using {@link SmartComparator} in the system locale.
 	 */
 	@Override
-	public Collator getCollator() {
-		return collator;
+	public Comparator<? super String> getComparator() {
+		return comparator;
 	}
 }

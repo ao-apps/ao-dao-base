@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,8 +23,8 @@
 package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Reason;
+import com.aoindustries.text.SmartComparator;
 import com.aoindustries.util.i18n.ThreadLocale;
-import java.text.Collator;
 
 public final class SingleReason
 	extends AbstractReason
@@ -58,7 +58,8 @@ public final class SingleReason
 	public int compareTo(Reason other) {
 		if(other instanceof SingleReason) {
 			SingleReason otherSingleReason = (SingleReason)other;
-			return Collator.getInstance(ThreadLocale.get()).compare(reason, otherSingleReason.reason);
+			// Sort by lexical display in current locale
+			return new SmartComparator(ThreadLocale.get()).compare(reason, otherSingleReason.reason);
 		} else {
 			return -1; // Single reasons before aggregate
 		}

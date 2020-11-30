@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,8 +23,8 @@
 package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Tuple;
-import java.text.Collator;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Allows sets of columns to be used as multi-column keys.
@@ -37,10 +37,10 @@ abstract public class AbstractTuple<
 	implements Tuple<T>
 {
 
-	private final Collator collator;
+	private final Comparator<? super String> comparator;
 
-	protected AbstractTuple(Collator collator) {
-		this.collator = collator;
+	protected AbstractTuple(Comparator<? super String> comparator) {
+		this.comparator = comparator;
 	}
 
 	@Override
@@ -93,9 +93,7 @@ abstract public class AbstractTuple<
 			) {
 				String s1 = column1.toString();
 				String s2 = column2.toString();
-				// TODO: If both strings begin with a number, sort by that first
-				// TODO: This is for lot numbers, such as 1A, 1B, 2, 3, 10, 20, 100A
-				diff = s1.equals(s2) ? 0 : collator.compare(s1, s2);
+				diff = s1.equals(s2) ? 0 : comparator.compare(s1, s2);
 			} else {
 				// Sort nulls as larger than any non-null
 				if(column1 == null) {

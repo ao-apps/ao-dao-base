@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2013, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,7 +23,7 @@
 package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Tuple2;
-import java.text.Collator;
+import java.util.Comparator;
 
 /**
  * A compound key with two columns.
@@ -43,8 +43,8 @@ public class Tuple2Impl<
 	private final C1 column1;
 	private final C2 column2;
 
-	public Tuple2Impl(Collator collator, C1 column1, C2 column2) {
-		super(collator);
+	public Tuple2Impl(Comparator<? super String> comparator, C1 column1, C2 column2) {
+		super(comparator);
 		this.column1 = column1;
 		this.column2 = column2;
 	}
