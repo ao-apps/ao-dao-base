@@ -29,7 +29,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * Provides encryption routines.
@@ -61,24 +60,16 @@ public class Encryption {
 	 * @see  HashedKey for SHA-256 hashing
 	 */
 	@Deprecated
+	// TODO: Return base64 URL safe, no padding?
 	public static String hash(String plaintext) throws WrappedException {
 		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			md.update(plaintext.getBytes(StandardCharsets.UTF_8));
-			return hexEncode(md.digest());
+			return hexEncode(MessageDigest.getInstance("SHA-1").digest(plaintext.getBytes(StandardCharsets.UTF_8)));
 		} catch(NoSuchAlgorithmException e) {
 			throw new WrappedException(e);
 		}
 	}
 
-	private static final Random random = new SecureRandom();
-
-	/**
-	 * Gets the secure random.
-	 */
-	private static Random getRandom() {
-		return random;
-	}
+	private static final SecureRandom secureRandom = new SecureRandom();
 
 	private static final char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
@@ -87,7 +78,7 @@ public class Encryption {
 	 */
 	public static String generateKey() {
 		byte[] bytes = new byte[32];
-		getRandom().nextBytes(bytes);
+		secureRandom.nextBytes(bytes);
 		char[] chars = new char[64];
 		for(int c=0;c<32;c++) {
 			byte b = bytes[c];
