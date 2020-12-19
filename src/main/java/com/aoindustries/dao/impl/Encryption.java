@@ -38,6 +38,7 @@ public class Encryption {
 	private Encryption() {
 	}
 
+	// TODO: Use Strings.convertToHex?
 	private static String hexEncode(byte[] bytes) {
 		int len = bytes.length;
 		StringBuilder sb = new StringBuilder(len*2);
