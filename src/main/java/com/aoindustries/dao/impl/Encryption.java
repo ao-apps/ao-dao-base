@@ -23,8 +23,6 @@
 package com.aoindustries.dao.impl;
 
 import com.aoindustries.exception.WrappedException;
-import com.aoindustries.security.HashedKey;
-import com.aoindustries.security.HashedPassword;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -57,8 +55,8 @@ public class Encryption {
 	 * 
 	 * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
 	 * 
-	 * @see  HashedPassword for proper password hashing
-	 * @see  HashedKey for SHA-256 hashing
+	 * @see  com.aoindustries.security.HashedPassword for proper password hashing
+	 * @see  com.aoindustries.security.HashedKey for stronger hashing
 	 */
 	@Deprecated
 	// TODO: Return base64 URL safe, no padding?
