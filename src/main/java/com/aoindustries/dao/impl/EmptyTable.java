@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2016  AO Industries, Inc.
+ * Copyright (C) 2016, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -37,9 +37,9 @@ import java.util.SortedSet;
  */
 public class EmptyTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,?>
+	R extends Row<K, ?>
 >
-	implements Table<K,R>
+	implements Table<K, R>
 {
 
 	private final Model model;

@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -39,18 +39,18 @@ import java.util.TreeSet;
  */
 abstract public class RowCacheTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,?>
+	R extends Row<K, ?>
 >
-	extends AbstractTable<K,R>
+	extends AbstractTable<K, R>
 {
 
 	protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
 
 	private final ThreadLocal<SortedSet<? extends R>> sortedRowsCache = new ThreadLocal<>();
 
-	private final ThreadLocal<Map<K,R>> rowCache = new ThreadLocal<Map<K,R>>() {
+	private final ThreadLocal<Map<K, R>> rowCache = new ThreadLocal<Map<K, R>>() {
 		@Override
-		protected Map<K,R> initialValue() {
+		protected Map<K, R> initialValue() {
 			return new HashMap<>();
 		}
 	};
@@ -90,7 +90,7 @@ abstract public class RowCacheTable<
 			rows = Collections.unmodifiableSet(getRowsNoCache());
 
 			// Populate rowCache fully
-			Map<K,R> cache = rowCache.get();
+			Map<K, R> cache = rowCache.get();
 			cache.clear();
 			for(R row : rows) {
 				if(cache.put(canonicalize(row.getKey()), row) != null) {
@@ -128,7 +128,7 @@ abstract public class RowCacheTable<
 	@Override
 	public R get(final K key) throws NoRowException, SQLException {
 		final K canonicalKey = canonicalize(key);
-		Map<K,R> cache = rowCache.get();
+		Map<K, R> cache = rowCache.get();
 		if(cache.containsKey(canonicalKey)) {
 			R row = cache.get(canonicalKey);
 			if(row==null) throw new NoRowException(getName()+" not found: "+key);

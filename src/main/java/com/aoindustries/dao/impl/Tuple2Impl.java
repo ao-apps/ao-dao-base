@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2013, 2015, 2016, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,10 +34,10 @@ public class Tuple2Impl<
 	C1 extends Comparable<? super C1>,
 	C2 extends Comparable<? super C2>
 >
-	extends AbstractTuple<Tuple2Impl<C1,C2>>
+	extends AbstractTuple<Tuple2Impl<C1, C2>>
 	implements
-		Tuple2<C1,C2,Tuple2Impl<C1,C2>>,
-		Comparable<Tuple2Impl<C1,C2>>
+		Tuple2<C1, C2, Tuple2Impl<C1, C2>>,
+		Comparable<Tuple2Impl<C1, C2>>
 {
 
 	private final C1 column1;

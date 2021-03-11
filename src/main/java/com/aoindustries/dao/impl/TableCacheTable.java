@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -45,9 +45,9 @@ import java.util.TreeSet;
  */
 abstract public class TableCacheTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,?>
+	R extends Row<K, ?>
 >
-	extends AbstractTable<K,R>
+	extends AbstractTable<K, R>
 {
 
 	protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
@@ -61,9 +61,9 @@ abstract public class TableCacheTable<
 		}
 	};
 
-	private final ThreadLocal<Map<K,R>> rowCache = new ThreadLocal<Map<K,R>>() {
+	private final ThreadLocal<Map<K, R>> rowCache = new ThreadLocal<Map<K, R>>() {
 		@Override
-		protected Map<K,R> initialValue() {
+		protected Map<K, R> initialValue() {
 			return new HashMap<>();
 		}
 	};
@@ -131,7 +131,7 @@ abstract public class TableCacheTable<
 
 	@Override
 	public R get(K key) throws NoRowException, SQLException {
-		Map<K,R> cache = rowCache.get();
+		Map<K, R> cache = rowCache.get();
 		if(!rowCachedLoaded.get()) {
 			// Load all rows in a single query
 			cache.clear();

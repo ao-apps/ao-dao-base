@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -37,16 +37,16 @@ import java.util.SortedMap;
 
 abstract public class AbstractTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,?>
+	R extends Row<K, ?>
 >
-	implements Table<K,R>
+	implements Table<K, R>
 {
 
 	private final Class<K> keyClass;
 	private final Class<R> rowClass;
 	private final Model model;
 
-	class TableMap implements Map<K,R> {
+	class TableMap implements Map<K, R> {
 
 		@Override
 		public int size() {
@@ -134,12 +134,12 @@ abstract public class AbstractTable<
 		}
 
 		@Override
-		public Set<Map.Entry<K,R>> entrySet() {
+		public Set<Map.Entry<K, R>> entrySet() {
 			throw new UnsupportedOperationException("TODO: Not supported yet.");
 		}
 	}
 
-	class TableSortedMap extends TableMap implements SortedMap<K,R> {
+	class TableSortedMap extends TableMap implements SortedMap<K, R> {
 		@Override
 		public Comparator<? super K> comparator() {
 			return null;
@@ -179,9 +179,9 @@ abstract public class AbstractTable<
 		}
 	}
 
-	protected final Map<K,R> map = new TableMap();
+	protected final Map<K, R> map = new TableMap();
 
-	protected final SortedMap<K,R> sortedMap = new TableSortedMap();
+	protected final SortedMap<K, R> sortedMap = new TableSortedMap();
 
 	protected AbstractTable(Class<K> keyClass, Class<R> rowClass, Model model) {
 		this.keyClass = keyClass;
@@ -196,13 +196,13 @@ abstract public class AbstractTable<
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField")
-	public Map<K,? extends R> getMap() {
+	public Map<K, ? extends R> getMap() {
 		return map;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField")
-	public SortedMap<K,? extends R> getSortedMap() {
+	public SortedMap<K, ? extends R> getSortedMap() {
 		return sortedMap;
 	}
 }

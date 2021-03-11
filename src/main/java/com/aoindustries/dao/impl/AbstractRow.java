@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,9 +27,9 @@ import com.aoindustries.dao.Row;
 
 abstract public class AbstractRow<
 	K extends Comparable<? super K>,
-	R extends AbstractRow<K,?> & Comparable<? super R>
+	R extends AbstractRow<K, ?> & Comparable<? super R>
 >
-	implements Row<K,R>
+	implements Row<K, R>
 {
 
 	private final Model model;
@@ -64,9 +64,9 @@ abstract public class AbstractRow<
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if(!(o instanceof AbstractRow<?,?>)) return false;
+		if(!(o instanceof AbstractRow<?, ?>)) return false;
 		if(!clazz.isInstance(o)) return false;
-		AbstractRow<K,?> other = clazz.cast(o);
+		AbstractRow<K, ?> other = clazz.cast(o);
 		if(model!=other.model) return false;
 		K canonicalKey1 = getTable().canonicalize(getKey());
 		K canonicalKey2 = other.getTable().canonicalize(other.getKey());

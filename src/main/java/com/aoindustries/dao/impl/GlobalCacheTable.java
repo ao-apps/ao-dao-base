@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -49,9 +49,9 @@ import java.util.TreeSet;
  */
 abstract public class GlobalCacheTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,?>
+	R extends Row<K, ?>
 >
-	extends AbstractTable<K,R>
+	extends AbstractTable<K, R>
 {
 
 	private final Object unsortedRowsCacheLock = new Object();
@@ -62,7 +62,7 @@ abstract public class GlobalCacheTable<
 
 	private final Object rowCacheLock = new Object();
 	private boolean rowCacheLoaded = false;
-	private final Map<K,R> rowCache = new HashMap<>();
+	private final Map<K, R> rowCache = new HashMap<>();
 
 	protected GlobalCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
 		super(keyClass, rowClass, model);
