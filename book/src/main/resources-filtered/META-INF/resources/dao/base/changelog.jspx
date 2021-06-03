@@ -22,7 +22,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 -->
 <jsp:root
-	xmlns:ao="https://aoindustries.com/ao-taglib/"
+	xmlns:ao="https://oss.aoapps.com/taglib/"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:changelog="https://semanticcms.com/changelog/taglib/"
 	xmlns:core="https://semanticcms.com/core/taglib/"
@@ -37,7 +37,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:25:52-05:00"
-		dateModified="2021-05-26T06:36:49-05:00"
+		dateModified="2021-05-31T01:04:26-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -45,10 +45,12 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 				version="@{project.version}"
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
+				repository="https://s01.oss.sonatype.org/content/repositories/snapshots/"
 				scmUrl="@{project.scm.url}"
 			>
 				<ul>
 					<li>Minimum Java version changed from 1.8 to 11.</li>
+					<li>Maven artifact relocated from <code>com.aoindustries:ao-dao-base</code> to <code>com.aoapps:ao-dao-base</code>.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
@@ -57,7 +59,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="2.0.0"
 			datePublished="2020-11-29T23:10:47-06:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -65,7 +67,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 				<li>
 					Now sorting with <ao:a rel="nofollow" href="@{javadoc.link.javase}java/util/Comparator.html">Comparator</ao:a>
 					instead of <ao:a rel="nofollow" href="@{javadoc.link.javase}java/text/Collator.html">Collator</ao:a>.
-					Defaults to using <ao:a href="https://aoindustries.com/ao-lang/apidocs/com/aoindustries/text/SmartComparator.html">SmartComparator</ao:a>
+					Defaults to using <ao:a href="https://oss.aoapps.com/lang/apidocs/com/aoindustries/text/SmartComparator.html">SmartComparator</ao:a>
 					in the system locale.
 				</li>
 			</ul>
@@ -75,7 +77,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.6"
 			datePublished="2020-03-28T17:58:34-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -91,7 +93,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.5"
 			datePublished="2019-10-05T19:05:52-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -104,7 +106,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.4"
 			datePublished="2019-06-21T02:44:53-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -122,7 +124,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.3"
 			datePublished="2017-07-20T01:35:56-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -135,12 +137,12 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.2"
 			datePublished="2016-11-15T23:53:17-06:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
 			<ul>
-				<li>New <core:link book="/ao-oss-parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
+				<li>New <core:link book="/parent" page="/index.jspx" /> POM to simplify <code>pom.xml</code> files.</li>
 				<li>Project documentation moved to per-project book in <ao:a href="https://semanticcms.com/">SemanticCMS</ao:a> format.</li>
 				<li>Added changelog as top-level project link.</li>
 			</ul>
@@ -150,7 +152,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.1"
 			datePublished="2016-10-20T18:21:00-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
@@ -164,7 +166,7 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			projectName="@{documented.name}"
 			version="1.0.0"
 			datePublished="2016-10-09T16:22:00-05:00"
-			groupId="@{project.groupId}"
+			groupId="com.aoindustries"
 			artifactId="@{documented.artifactId}"
 			scmUrl="@{project.scm.url}"
 		>
