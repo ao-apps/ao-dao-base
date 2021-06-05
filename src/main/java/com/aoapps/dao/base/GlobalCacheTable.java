@@ -20,11 +20,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-base.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoapps.dao.base;
 
-import com.aoindustries.dao.Model;
-import com.aoindustries.dao.Row;
-import com.aoindustries.dbc.NoRowException;
+import com.aoapps.dao.Model;
+import com.aoapps.dao.Row;
+import com.aoapps.dbc.NoRowException;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;

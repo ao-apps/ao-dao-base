@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,30 +20,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-base.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoapps.dao.base;
 
-import com.aoindustries.dao.Model;
-import com.aoindustries.dao.Row;
-import com.aoindustries.dbc.NoRowException;
+import com.aoapps.dao.Model;
+import com.aoapps.dao.Row;
+import com.aoapps.dbc.NoRowException;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * Caches results by querying the entire table upon first use.  The cache is
- * per-request and per-user.
- * <ol>
- *   <li>All rows are loaded and stored unsorted</li>
- *   <li>allRowsLoaded is called, given unsorted rows</li>
- *   <li>Map is built upon first call to get(K)</li>
- *   <li>Rows are sorted upon first call to getRows</li>
- * </ol>
+ * Caches results on a per-row basis.
  */
-abstract public class TableCacheTable<
+abstract public class RowCacheTable<
 	K extends Comparable<? super K>,
 	R extends Row<K, ?>
 >
@@ -54,13 +48,6 @@ abstract public class TableCacheTable<
 
 	private final ThreadLocal<SortedSet<? extends R>> sortedRowsCache = new ThreadLocal<>();
 
-	private final ThreadLocal<Boolean> rowCachedLoaded = new ThreadLocal<Boolean>() {
-		@Override
-		protected Boolean initialValue() {
-			return Boolean.FALSE;
-		}
-	};
-
 	private final ThreadLocal<Map<K, R>> rowCache = new ThreadLocal<Map<K, R>>() {
 		@Override
 		protected Map<K, R> initialValue() {
@@ -68,14 +55,13 @@ abstract public class TableCacheTable<
 		}
 	};
 
-	protected TableCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
+	protected RowCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
 		super(keyClass, rowClass, model);
 	}
 
 	private void clearCaches0() {
 		unsortedRowsCache.remove();
 		sortedRowsCache.remove();
-		rowCachedLoaded.set(Boolean.FALSE);
 		rowCache.get().clear();
 	}
 
@@ -102,6 +88,16 @@ abstract public class TableCacheTable<
 		Set<? extends R> rows = unsortedRowsCache.get();
 		if(rows==null) {
 			rows = Collections.unmodifiableSet(getRowsNoCache());
+
+			// Populate rowCache fully
+			Map<K, R> cache = rowCache.get();
+			cache.clear();
+			for(R row : rows) {
+				if(cache.put(canonicalize(row.getKey()), row) != null) {
+					throw new SQLException("Duplicate key: " + row.getKey());
+				}
+			}
+
 			allRowsLoaded(rows);
 			unsortedRowsCache.set(rows);
 		}
@@ -110,7 +106,7 @@ abstract public class TableCacheTable<
 
 	/**
 	 * Called when all rows have been loaded at once.  This allows for subclasses
-	 * to populate any views or caches.
+	 * to populate any views or caches in a more efficient manner than row-by-row.
 	 *
 	 * This default implementation does nothing.
 	 */
@@ -130,22 +126,38 @@ abstract public class TableCacheTable<
 	}
 
 	@Override
-	public R get(K key) throws NoRowException, SQLException {
+	public R get(final K key) throws NoRowException, SQLException {
+		final K canonicalKey = canonicalize(key);
 		Map<K, R> cache = rowCache.get();
-		if(!rowCachedLoaded.get()) {
-			// Load all rows in a single query
-			cache.clear();
-			for(R row : getUnsortedRows()) {
-				if(cache.put(canonicalize(row.getKey()), row) != null) {
-					throw new SQLException("Duplicate key: " + row.getKey());
-				}
-			}
-			rowCachedLoaded.set(Boolean.TRUE);
+		if(cache.containsKey(canonicalKey)) {
+			R row = cache.get(canonicalKey);
+			if(row==null) throw new NoRowException(getName()+" not found: "+key);
+			return row;
 		}
-		R row = cache.get(canonicalize(key));
-		if(row==null) throw new NoRowException(getName()+" not found: "+key);
-		return row;
+
+		// Doesn't exist when all rows have been loaded
+		if(unsortedRowsCache.get()!=null) throw new NoRowException(getName()+" not found: "+key);
+
+		// Try single row query - cache hits and misses
+		try {
+			R row = getNoCache(canonicalKey);
+			addToCache(canonicalKey, row);
+			return row;
+		} catch(NoRowException err) {
+			cache.put(canonicalKey, null);
+			throw new NoRowException(getName()+" not found: "+key, err);
+		}
 	}
+
+	/**
+	 * Adds a single object to the cache.
+	 */
+	protected void addToCache(K canonicalKey, R row) {
+		assert Objects.equals(canonicalize(row.getKey()), canonicalKey);
+		rowCache.get().put(canonicalKey, row);
+	}
+
+	abstract protected R getNoCache(K canonicalKey) throws NoRowException, SQLException;
 
 	abstract protected Set<? extends R> getRowsNoCache() throws SQLException;
 }

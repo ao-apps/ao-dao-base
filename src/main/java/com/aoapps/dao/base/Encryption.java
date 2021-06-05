@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-base.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoapps.dao.base;
 
-import com.aoindustries.exception.WrappedException;
+import com.aoapps.lang.exception.WrappedException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -55,8 +55,8 @@ public class Encryption {
 	 * 
 	 * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
 	 * 
-	 * @see  com.aoindustries.security.HashedPassword for proper password hashing
-	 * @see  com.aoindustries.security.HashedKey for stronger hashing
+	 * @see  com.aoapps.security.HashedPassword for proper password hashing
+	 * @see  com.aoapps.security.HashedKey for stronger hashing
 	 */
 	@Deprecated
 	// TODO: Return base64 URL safe, no padding?

@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,38 +20,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-base.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoapps.dao.base;
 
-import com.aoindustries.dao.TupleN;
-import java.util.Arrays;
+import com.aoapps.dao.Model;
+import com.aoapps.lang.text.SmartComparator;
 import java.util.Comparator;
 
 /**
- * A compound key with any number of columns of the same type.
- *
- * @author  AO Industries, Inc.
+ * A base implementation of <code>DaoDatabase</code>.
  */
-public class TupleNImpl<
-	C extends Comparable<? super C>
->
-	extends AbstractTuple<TupleNImpl<C>>
-	implements
-		TupleN<C, TupleNImpl<C>>,
-		Comparable<TupleNImpl<C>>
+abstract public class AbstractModel
+	implements Model
 {
 
-	private final C[] columns;
+	/**
+	 * A single Comparator for shared use.
+	 */
+	private static final Comparator<? super String> comparator = new SmartComparator();
 
-	@SafeVarargs
-	// Java 1.8 compiler still giving warning even with @SafeVarargs
-	@SuppressWarnings({"unchecked", "varargs"})
-	public TupleNImpl(Comparator<? super String> comparator, C ... columns) {
-		super(comparator);
-		this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
-	}
-
+	/**
+	 * By default, sorts using {@link SmartComparator} in the system locale.
+	 */
 	@Override
-	public C[] getColumns() {
-		return Arrays.copyOf(columns, columns.length); // Defensive copy
+	public Comparator<? super String> getComparator() {
+		return comparator;
 	}
 }

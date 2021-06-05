@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,10 +20,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao-base.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoapps.dao.base;
 
-import com.aoindustries.dao.Reason;
-import com.aoindustries.dao.Removable;
+import com.aoapps.dao.Reason;
+import com.aoapps.dao.Removable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
