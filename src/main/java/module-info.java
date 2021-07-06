@@ -22,12 +22,11 @@
  */
 module com.aoapps.dao.base {
 	exports com.aoapps.dao.base;
-	// Javadoc-only
-	requires static com.aoapps.security; // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
 	// Direct
 	requires com.aoapps.dao.api; // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
 	requires com.aoapps.dbc; // <groupId>com.aoapps</groupId><artifactId>ao-dbc</artifactId>
 	requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+	requires static com.aoapps.security; // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
 	// Java SE
 	requires java.sql;
 }

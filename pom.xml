@@ -79,6 +79,20 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 		<url>https://github.com/aoindustries/ao-dao-base/issues</url>
 	</issueManagement>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<usedDependencies>
+						<!-- Javadoc-only -->
+						<dependency>com.aoapps:ao-security</dependency>
+					</usedDependencies>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<profiles>
 		<profile>
 			<id>offlineLinks</id><activation><file><exists>src/main/java</exists></file></activation>
@@ -91,12 +105,6 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 								<id>unpack.offlineLinks</id><phase>generate-sources</phase><goals><goal>unpack</goal></goals>
 								<configuration>
 									<artifactItems>
-										<!-- Javadoc-only -->
-										<artifactItem>
-											<groupId>com.aoapps</groupId><artifactId>ao-security</artifactId><classifier>javadoc</classifier>
-											<includes>element-list, package-list</includes>
-											<outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-security</outputDirectory>
-										</artifactItem>
 										<!-- Direct -->
 										<artifactItem>
 											<groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId><classifier>javadoc</classifier>
@@ -113,6 +121,11 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</outputDirectory>
 										</artifactItem>
+										<artifactItem>
+											<groupId>com.aoapps</groupId><artifactId>ao-security</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-security</outputDirectory>
+										</artifactItem>
 									</artifactItems>
 								</configuration>
 							</execution>
@@ -122,11 +135,6 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 						<configuration>
 							<offlineLinks>
-								<!-- Javadoc-only -->
-								<offlineLink>
-									<url>https://oss.aoapps.com/security/apidocs/</url>
-									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-security</location>
-								</offlineLink>
 								<!-- Direct -->
 								<offlineLink>
 									<url>https://oss.aoapps.com/dao/api/apidocs/</url>
@@ -139,6 +147,10 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 								<offlineLink>
 									<url>https://oss.aoapps.com/lang/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://oss.aoapps.com/security/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-security</location>
 								</offlineLink>
 								<!-- Java SE -->
 								<offlineLink>
@@ -155,11 +167,6 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Javadoc-only -->
-			<dependency>
-				<groupId>com.aoapps</groupId><artifactId>ao-security</artifactId><version>3.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
-				<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
-			</dependency>
 			<!-- Direct -->
 			<dependency>
 				<groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId><version>3.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
@@ -169,6 +176,11 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 			</dependency>
 			<dependency>
 				<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><version>5.0.0${POST-SNAPSHOT}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aoapps</groupId><artifactId>ao-security</artifactId><version>3.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+				<!-- Javadoc-only -->
+				<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
 			</dependency>
 			<!-- Transitive -->
 			<dependency>
@@ -211,11 +223,6 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- Javadoc-only -->
-		<dependency>
-			<groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
@@ -225,6 +232,11 @@ along with ao-dao-base.  If not, see <http://www.gnu.org/licenses />.
 		</dependency>
 		<dependency>
 			<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
+			<!-- Javadoc-only -->
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 </project>
