@@ -103,8 +103,8 @@ public abstract class AbstractReason
 	}
 
 	@Override
-	abstract public String toString();
+	public abstract String toString();
 
 	@Override
-	abstract public AbstractReason merge(Reason other);
+	public abstract AbstractReason merge(Reason other);
 }

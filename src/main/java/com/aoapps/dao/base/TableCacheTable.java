@@ -43,7 +43,7 @@ import java.util.TreeSet;
  *   <li>Rows are sorted upon first call to getRows</li>
  * </ol>
  */
-abstract public class TableCacheTable<
+public abstract class TableCacheTable<
 	K extends Comparable<? super K>,
 	R extends Row<K, ?>
 >
@@ -147,5 +147,5 @@ abstract public class TableCacheTable<
 		return row;
 	}
 
-	abstract protected Set<? extends R> getRowsNoCache() throws SQLException;
+	protected abstract Set<? extends R> getRowsNoCache() throws SQLException;
 }

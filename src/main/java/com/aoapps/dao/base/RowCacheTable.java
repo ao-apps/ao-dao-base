@@ -37,7 +37,7 @@ import java.util.TreeSet;
 /**
  * Caches results on a per-row basis.
  */
-abstract public class RowCacheTable<
+public abstract class RowCacheTable<
 	K extends Comparable<? super K>,
 	R extends Row<K, ?>
 >
@@ -157,7 +157,7 @@ abstract public class RowCacheTable<
 		rowCache.get().put(canonicalKey, row);
 	}
 
-	abstract protected R getNoCache(K canonicalKey) throws NoRowException, SQLException;
+	protected abstract R getNoCache(K canonicalKey) throws NoRowException, SQLException;
 
-	abstract protected Set<? extends R> getRowsNoCache() throws SQLException;
+	protected abstract Set<? extends R> getRowsNoCache() throws SQLException;
 }

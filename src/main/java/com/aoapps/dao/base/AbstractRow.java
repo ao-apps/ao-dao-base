@@ -25,7 +25,7 @@ package com.aoapps.dao.base;
 import com.aoapps.dao.Model;
 import com.aoapps.dao.Row;
 
-abstract public class AbstractRow<
+public abstract class AbstractRow<
 	K extends Comparable<? super K>,
 	R extends AbstractRow<K, ?> & Comparable<? super R>
 >

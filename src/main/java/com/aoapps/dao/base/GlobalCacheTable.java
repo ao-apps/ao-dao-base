@@ -47,7 +47,7 @@ import java.util.TreeSet;
  * TODO: Once both done, more aggressively use global caches for better remote database performance
  * TODO: Publish PHP version on PECL
  */
-abstract public class GlobalCacheTable<
+public abstract class GlobalCacheTable<
 	K extends Comparable<? super K>,
 	R extends Row<K, ?>
 >
@@ -141,5 +141,5 @@ abstract public class GlobalCacheTable<
 		}
 	}
 
-	abstract protected Set<? extends R> getRowsNoCache() throws SQLException;
+	protected abstract Set<? extends R> getRowsNoCache() throws SQLException;
 }

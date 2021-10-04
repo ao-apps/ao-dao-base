@@ -29,7 +29,7 @@ import java.util.Comparator;
 /**
  * A base implementation of <code>DaoDatabase</code>.
  */
-abstract public class AbstractModel
+public abstract class AbstractModel
 	implements Model
 {
 

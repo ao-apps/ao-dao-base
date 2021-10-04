@@ -35,7 +35,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 
-abstract public class AbstractTable<
+public abstract class AbstractTable<
 	K extends Comparable<? super K>,
 	R extends Row<K, ?>
 >

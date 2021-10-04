@@ -31,7 +31,7 @@ import java.util.Comparator;
  *
  * @author  AO Industries, Inc.
  */
-abstract public class AbstractTuple<
+public abstract class AbstractTuple<
 	T extends AbstractTuple<T> & Comparable<? super T>
 >
 	implements Tuple<T>
@@ -44,7 +44,7 @@ abstract public class AbstractTuple<
 	}
 
 	@Override
-	abstract public Comparable<?>[] getColumns();
+	public abstract Comparable<?>[] getColumns();
 
 	@Override
 	public String toString() {
