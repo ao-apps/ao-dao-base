@@ -48,12 +48,7 @@ public abstract class RowCacheTable<
 
 	private final ThreadLocal<SortedSet<? extends R>> sortedRowsCache = new ThreadLocal<>();
 
-	private final ThreadLocal<Map<K, R>> rowCache = new ThreadLocal<Map<K, R>>() {
-		@Override
-		protected Map<K, R> initialValue() {
-			return new HashMap<>();
-		}
-	};
+	private final ThreadLocal<Map<K, R>> rowCache = ThreadLocal.withInitial(HashMap::new);
 
 	protected RowCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
 		super(keyClass, rowClass, model);
