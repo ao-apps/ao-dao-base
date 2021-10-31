@@ -65,8 +65,8 @@ public abstract class TableCacheTable<
 	private void clearCaches0() {
 		unsortedRowsCache.remove();
 		sortedRowsCache.remove();
-		rowCachedLoaded.set(Boolean.FALSE);
-		rowCache.get().clear();
+		rowCachedLoaded.remove();
+		rowCache.remove();
 	}
 
 	/**
@@ -130,7 +130,7 @@ public abstract class TableCacheTable<
 					throw new SQLException("Duplicate key: " + row.getKey());
 				}
 			}
-			rowCachedLoaded.set(Boolean.TRUE);
+			rowCachedLoaded.set(true);
 		}
 		R row = cache.get(canonicalize(key));
 		if(row==null) throw new NoRowException(getName()+" not found: "+key);

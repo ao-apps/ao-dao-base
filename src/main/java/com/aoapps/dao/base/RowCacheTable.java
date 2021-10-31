@@ -57,7 +57,7 @@ public abstract class RowCacheTable<
 	private void clearCaches0() {
 		unsortedRowsCache.remove();
 		sortedRowsCache.remove();
-		rowCache.get().clear();
+		rowCache.remove();
 	}
 
 	/**
@@ -131,7 +131,7 @@ public abstract class RowCacheTable<
 		}
 
 		// Doesn't exist when all rows have been loaded
-		if(unsortedRowsCache.get()!=null) throw new NoRowException(getName()+" not found: "+key);
+		if(unsortedRowsCache.get() != null) throw new NoRowException(getName() + " not found: " + key);
 
 		// Try single row query - cache hits and misses
 		try {
