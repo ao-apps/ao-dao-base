@@ -52,9 +52,9 @@ public class Encryption {
 	 * Performs a one-way hash of the plaintext value using SHA-1.
 	 *
 	 * @exception  WrappedException  if any problem occurs.
-	 * 
+	 *
 	 * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
-	 * 
+	 *
 	 * @see  com.aoapps.security.HashedPassword for proper password hashing
 	 * @see  com.aoapps.security.HashedKey for stronger hashing
 	 */
@@ -68,6 +68,9 @@ public class Encryption {
 		}
 	}
 
+	/**
+	 * Note: This is not a {@linkplain SecureRandom#getInstanceStrong() strong instance} to avoid blocking.
+	 */
 	private static final SecureRandom secureRandom = new SecureRandom();
 
 	private static final char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -79,10 +82,10 @@ public class Encryption {
 		byte[] bytes = new byte[32];
 		secureRandom.nextBytes(bytes);
 		char[] chars = new char[64];
-		for(int c=0;c<32;c++) {
+		for(int c = 0; c < 32;c++) {
 			byte b = bytes[c];
-			chars[c*2]=hexChars[(b&255)>>>4];
-			chars[c*2+1]=hexChars[b&15];
+			chars[c * 2] = hexChars[(b & 255) >>> 4];
+			chars[c * 2 + 1] = hexChars[b & 15];
 		}
 		return new String(chars);
 	}
