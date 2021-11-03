@@ -113,7 +113,7 @@ public abstract class TableCacheTable<
 	public SortedSet<? extends R> getRows() throws SQLException {
 		SortedSet<? extends R> rows = sortedRowsCache.get();
 		if(rows==null) {
-			rows = Collections.unmodifiableSortedSet(new TreeSet<R>(getUnsortedRows()));
+			rows = Collections.unmodifiableSortedSet(new TreeSet<>(getUnsortedRows()));
 			sortedRowsCache.set(rows);
 		}
 		return rows;

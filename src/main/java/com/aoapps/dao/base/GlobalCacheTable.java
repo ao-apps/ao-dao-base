@@ -115,7 +115,7 @@ public abstract class GlobalCacheTable<
 		synchronized(sortedRowsCacheLock) {
 			SortedSet<? extends R> rows = sortedRowsCache;
 			if(rows==null) {
-				rows = Collections.unmodifiableSortedSet(new TreeSet<R>(getUnsortedRows()));
+				rows = Collections.unmodifiableSortedSet(new TreeSet<>(getUnsortedRows()));
 				sortedRowsCache = rows;
 			}
 			return rows;
