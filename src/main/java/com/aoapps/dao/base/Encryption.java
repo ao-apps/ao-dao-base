@@ -31,10 +31,10 @@ import java.security.SecureRandom;
 /**
  * Provides encryption routines.
  */
-public class Encryption {
+public abstract class Encryption {
 
-	private Encryption() {
-	}
+	/** Make no instances. */
+	private Encryption() {throw new AssertionError();}
 
 	// TODO: Use Strings.convertToHex?
 	private static String hexEncode(byte[] bytes) {
