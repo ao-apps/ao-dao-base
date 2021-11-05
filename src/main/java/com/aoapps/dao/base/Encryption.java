@@ -58,7 +58,7 @@ public abstract class Encryption {
 	 * @see  com.aoapps.security.HashedPassword for proper password hashing
 	 * @see  com.aoapps.security.HashedKey for stronger hashing
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	// TODO: Return base64 URL safe, no padding?
 	public static String hash(String plaintext) throws WrappedException {
 		try {
