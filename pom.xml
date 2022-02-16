@@ -29,7 +29,7 @@ along with ao-dao-base.  If not, see <https://www.gnu.org/licenses/>.
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoapps</groupId><artifactId>ao-dao-base</artifactId><version>3.0.1</version>
+	<groupId>com.aoapps</groupId><artifactId>ao-dao-base</artifactId><version>3.0.1-POST-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -77,7 +77,7 @@ along with ao-dao-base.  If not, see <https://www.gnu.org/licenses/>.
 		<connection>scm:git:git://github.com/ao-apps/ao-dao-base.git</connection>
 		<developerConnection>scm:git:git@github.com:ao-apps/ao-dao-base.git</developerConnection>
 		<url>https://github.com/ao-apps/ao-dao-base</url>
-		<tag>ao-dao-base-3.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
