@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -31,7 +31,7 @@ import java.security.SecureRandom;
 /**
  * Provides encryption routines.
  */
-public abstract class Encryption {
+public final class Encryption {
 
 	/** Make no instances. */
 	private Encryption() {throw new AssertionError();}
