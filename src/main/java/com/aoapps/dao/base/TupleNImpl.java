@@ -33,26 +33,26 @@ import java.util.Comparator;
  * @author  AO Industries, Inc.
  */
 public class TupleNImpl<
-	C extends Comparable<? super C>
+  C extends Comparable<? super C>
 >
-	extends AbstractTuple<TupleNImpl<C>>
-	implements
-		TupleN<C, TupleNImpl<C>>,
-		Comparable<TupleNImpl<C>>
+  extends AbstractTuple<TupleNImpl<C>>
+  implements
+    TupleN<C, TupleNImpl<C>>,
+    Comparable<TupleNImpl<C>>
 {
 
-	private final C[] columns;
+  private final C[] columns;
 
-	@SafeVarargs
-	// Java 1.8 compiler still giving warning even with @SafeVarargs
-	@SuppressWarnings({"unchecked", "varargs"})
-	public TupleNImpl(Comparator<? super String> comparator, C ... columns) {
-		super(comparator);
-		this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
-	}
+  @SafeVarargs
+  // Java 1.8 compiler still giving warning even with @SafeVarargs
+  @SuppressWarnings({"unchecked", "varargs"})
+  public TupleNImpl(Comparator<? super String> comparator, C ... columns) {
+    super(comparator);
+    this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
+  }
 
-	@Override
-	public C[] getColumns() {
-		return Arrays.copyOf(columns, columns.length); // Defensive copy
-	}
+  @Override
+  public C[] getColumns() {
+    return Arrays.copyOf(columns, columns.length); // Defensive copy
+  }
 }

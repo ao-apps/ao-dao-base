@@ -33,80 +33,90 @@ import java.util.Comparator;
  * @author  AO Industries, Inc.
  */
 public abstract class AbstractTuple<
-	T extends AbstractTuple<T> & Comparable<? super T>
+  T extends AbstractTuple<T> & Comparable<? super T>
 >
-	implements Tuple<T>
+  implements Tuple<T>
 {
 
-	private final Comparator<? super String> comparator;
+  private final Comparator<? super String> comparator;
 
-	protected AbstractTuple(Comparator<? super String> comparator) {
-		this.comparator = comparator;
-	}
+  protected AbstractTuple(Comparator<? super String> comparator) {
+    this.comparator = comparator;
+  }
 
-	@Override
-	public abstract Comparable<?>[] getColumns();
+  @Override
+  public abstract Comparable<?>[] getColumns();
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append('(');
-		Comparable<?>[] columns = getColumns();
-		for(int i=0, len=columns.length; i<len; i++) {
-			if(i>0) sb.append(',');
-			sb.append(columns[i]);
-		}
-		sb.append(')');
-		return sb.toString();
-	}
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append('(');
+    Comparable<?>[] columns = getColumns();
+    for (int i=0, len=columns.length; i<len; i++) {
+      if (i>0) {
+        sb.append(',');
+      }
+      sb.append(columns[i]);
+    }
+    sb.append(')');
+    return sb.toString();
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof AbstractTuple<?>)) return false;
-		AbstractTuple<?> other = (AbstractTuple<?>)obj;
-		return Arrays.equals(getColumns(), other.getColumns());
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof AbstractTuple<?>)) {
+      return false;
+    }
+    AbstractTuple<?> other = (AbstractTuple<?>)obj;
+    return Arrays.equals(getColumns(), other.getColumns());
+  }
 
-	@Override
-	public int hashCode() {
-		return Arrays.hashCode(getColumns());
-	}
+  @Override
+  public int hashCode() {
+    return Arrays.hashCode(getColumns());
+  }
 
-	@Override
-	public int compareTo(T o) {
-		Comparable<?>[] columns1 = getColumns();
-		Comparable<?>[] columns2 = o.getColumns();
-		int len1 = columns1.length;
-		int len2 = columns2.length;
-		int minLen = Math.min(len1, len2);
-		for(int i=0; i<minLen; i++) {
-			// Is it always possible to treat as Comparable<Object>?
-			@SuppressWarnings("unchecked")
-			Comparable<Object> column1 = (Comparable<Object>)columns1[i];
+  @Override
+  public int compareTo(T o) {
+    Comparable<?>[] columns1 = getColumns();
+    Comparable<?>[] columns2 = o.getColumns();
+    int len1 = columns1.length;
+    int len2 = columns2.length;
+    int minLen = Math.min(len1, len2);
+    for (int i=0; i<minLen; i++) {
+      // Is it always possible to treat as Comparable<Object>?
+      @SuppressWarnings("unchecked")
+      Comparable<Object> column1 = (Comparable<Object>)columns1[i];
 
-			Comparable<?> column2 = columns2[i];
-			int diff;
-			if(
-				column1!=null
-				&& column2!=null
-				&& column1.getClass()==String.class
-				&& column2.getClass()==String.class
-			) {
-				String s1 = column1.toString();
-				String s2 = column2.toString();
-				diff = s1.equals(s2) ? 0 : comparator.compare(s1, s2);
-			} else {
-				// Sort nulls as larger than any non-null
-				if(column1 == null) {
-					diff = column2 == null ? 0 : 1;
-				} else {
-					diff = column2 == null ? -1 : column1.compareTo(column2);
-				}
-			}
-			if(diff!=0) return diff;
-		}
-		if(len2>minLen) return -1;
-		if(len1>minLen) return 1;
-		return 0;
-	}
+      Comparable<?> column2 = columns2[i];
+      int diff;
+      if (
+        column1 != null
+        && column2 != null
+        && column1.getClass() == String.class
+        && column2.getClass() == String.class
+      ) {
+        String s1 = column1.toString();
+        String s2 = column2.toString();
+        diff = s1.equals(s2) ? 0 : comparator.compare(s1, s2);
+      } else {
+        // Sort nulls as larger than any non-null
+        if (column1 == null) {
+          diff = column2 == null ? 0 : 1;
+        } else {
+          diff = column2 == null ? -1 : column1.compareTo(column2);
+        }
+      }
+      if (diff != 0) {
+        return diff;
+      }
+    }
+    if (len2>minLen) {
+      return -1;
+    }
+    if (len1>minLen) {
+      return 1;
+    }
+    return 0;
+  }
 }

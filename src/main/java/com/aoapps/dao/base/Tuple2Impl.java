@@ -32,39 +32,39 @@ import java.util.Comparator;
  * @author  AO Industries, Inc.
  */
 public class Tuple2Impl<
-	C1 extends Comparable<? super C1>,
-	C2 extends Comparable<? super C2>
+  C1 extends Comparable<? super C1>,
+  C2 extends Comparable<? super C2>
 >
-	extends AbstractTuple<Tuple2Impl<C1, C2>>
-	implements
-		Tuple2<C1, C2, Tuple2Impl<C1, C2>>,
-		Comparable<Tuple2Impl<C1, C2>>
+  extends AbstractTuple<Tuple2Impl<C1, C2>>
+  implements
+    Tuple2<C1, C2, Tuple2Impl<C1, C2>>,
+    Comparable<Tuple2Impl<C1, C2>>
 {
 
-	private final C1 column1;
-	private final C2 column2;
+  private final C1 column1;
+  private final C2 column2;
 
-	public Tuple2Impl(Comparator<? super String> comparator, C1 column1, C2 column2) {
-		super(comparator);
-		this.column1 = column1;
-		this.column2 = column2;
-	}
+  public Tuple2Impl(Comparator<? super String> comparator, C1 column1, C2 column2) {
+    super(comparator);
+    this.column1 = column1;
+    this.column2 = column2;
+  }
 
-	@Override
-	public Comparable<?>[] getColumns() {
-		return new Comparable<?>[] {
-			column1,
-			column2
-		};
-	}
+  @Override
+  public Comparable<?>[] getColumns() {
+    return new Comparable<?>[] {
+      column1,
+      column2
+    };
+  }
 
-	@Override
-	public C1 getColumn1() {
-		return column1;
-	}
+  @Override
+  public C1 getColumn1() {
+    return column1;
+  }
 
-	@Override
-	public C2 getColumn2() {
-		return column2;
-	}
+  @Override
+  public C2 getColumn2() {
+    return column2;
+  }
 }

@@ -37,45 +37,45 @@ import java.util.SortedSet;
  * An empty table does not return any rows and never finds any object.
  */
 public class EmptyTable<
-	K extends Comparable<? super K>,
-	R extends Row<K, ?>
+  K extends Comparable<? super K>,
+  R extends Row<K, ?>
 >
-	implements Table<K, R>
+  implements Table<K, R>
 {
 
-	private final Model model;
+  private final Model model;
 
-	protected EmptyTable(Model model) {
-		this.model = model;
-	}
+  protected EmptyTable(Model model) {
+    this.model = model;
+  }
 
-	@Override
-	public Model getModel() {
-		return model;
-	}
+  @Override
+  public Model getModel() {
+    return model;
+  }
 
-	@Override
-	public Map<K, ? extends R> getMap() {
-		return Collections.emptyMap();
-	}
+  @Override
+  public Map<K, ? extends R> getMap() {
+    return Collections.emptyMap();
+  }
 
-	@Override
-	public SortedMap<K, ? extends R> getSortedMap() {
-		return Collections.emptySortedMap();
-	}
+  @Override
+  public SortedMap<K, ? extends R> getSortedMap() {
+    return Collections.emptySortedMap();
+  }
 
-	@Override
-	public Set<? extends R> getUnsortedRows() {
-		return Collections.emptySet();
-	}
+  @Override
+  public Set<? extends R> getUnsortedRows() {
+    return Collections.emptySet();
+  }
 
-	@Override
-	public SortedSet<? extends R> getRows() {
-		return Collections.emptySortedSet();
-	}
+  @Override
+  public SortedSet<? extends R> getRows() {
+    return Collections.emptySortedSet();
+  }
 
-	@Override
-	public R get(K key) throws NoRowException {
-		throw new NoRowException(getName()+" not found: "+key);
-	}
+  @Override
+  public R get(K key) throws NoRowException {
+    throw new NoRowException(getName()+" not found: "+key);
+  }
 }

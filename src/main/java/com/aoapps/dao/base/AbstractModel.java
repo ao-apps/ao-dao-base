@@ -31,19 +31,19 @@ import java.util.Comparator;
  * A base implementation of <code>DaoDatabase</code>.
  */
 public abstract class AbstractModel
-	implements Model
+  implements Model
 {
 
-	/**
-	 * A single Comparator for shared use.
-	 */
-	private static final Comparator<? super String> comparator = new SmartComparator();
+  /**
+   * A single Comparator for shared use.
+   */
+  private static final Comparator<? super String> comparator = new SmartComparator();
 
-	/**
-	 * By default, sorts using {@link SmartComparator} in the system locale.
-	 */
-	@Override
-	public Comparator<? super String> getComparator() {
-		return comparator;
-	}
+  /**
+   * By default, sorts using {@link SmartComparator} in the system locale.
+   */
+  @Override
+  public Comparator<? super String> getComparator() {
+    return comparator;
+  }
 }

@@ -34,74 +34,76 @@ import java.security.SecureRandom;
  */
 public final class Encryption {
 
-	/** Make no instances. */
-	private Encryption() {throw new AssertionError();}
+  /** Make no instances. */
+  private Encryption() {
+    throw new AssertionError();
+  }
 
-	// TODO: Use Strings.convertToHex?
-	private static String hexEncode(byte[] bytes) {
-		int len = bytes.length;
-		StringBuilder sb = new StringBuilder(len*2);
-		for(int c=0; c<len; c++) {
-			int b = bytes[c];
-			sb.append(hexChars[(b>>4)&0xf]);
-			sb.append(hexChars[b&0xf]);
-		}
-		return sb.toString();
-	}
+  // TODO: Use Strings.convertToHex?
+  private static String hexEncode(byte[] bytes) {
+    int len = bytes.length;
+    StringBuilder sb = new StringBuilder(len*2);
+    for (int c=0; c<len; c++) {
+      int b = bytes[c];
+      sb.append(hexChars[(b>>4)&0xf]);
+      sb.append(hexChars[b&0xf]);
+    }
+    return sb.toString();
+  }
 
-	/**
-	 * Performs a one-way hash of the plaintext value using SHA-1.
-	 *
-	 * @exception  WrappedException  if any problem occurs.
-	 *
-	 * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
-	 *
-	 * @see  com.aoapps.security.HashedPassword for proper password hashing
-	 * @see  com.aoapps.security.HashedKey for stronger hashing
-	 */
-	@Deprecated(forRemoval = true)
-	// TODO: Return base64 URL safe, no padding?
-	public static String hash(String plaintext) throws WrappedException {
-		try {
-			return hexEncode(MessageDigest.getInstance("SHA-1").digest(plaintext.getBytes(StandardCharsets.UTF_8)));
-		} catch(NoSuchAlgorithmException e) {
-			throw new WrappedException(e);
-		}
-	}
+  /**
+   * Performs a one-way hash of the plaintext value using SHA-1.
+   *
+   * @exception  WrappedException  if any problem occurs.
+   *
+   * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
+   *
+   * @see  com.aoapps.security.HashedPassword for proper password hashing
+   * @see  com.aoapps.security.HashedKey for stronger hashing
+   */
+  @Deprecated(forRemoval = true)
+  // TODO: Return base64 URL safe, no padding?
+  public static String hash(String plaintext) throws WrappedException {
+    try {
+      return hexEncode(MessageDigest.getInstance("SHA-1").digest(plaintext.getBytes(StandardCharsets.UTF_8)));
+    } catch (NoSuchAlgorithmException e) {
+      throw new WrappedException(e);
+    }
+  }
 
-	/**
-	 * Note: This is not a {@linkplain SecureRandom#getInstanceStrong() strong instance} to avoid blocking.
-	 */
-	private static final SecureRandom secureRandom = new SecureRandom();
+  /**
+   * Note: This is not a {@linkplain SecureRandom#getInstanceStrong() strong instance} to avoid blocking.
+   */
+  private static final SecureRandom secureRandom = new SecureRandom();
 
-	private static final char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  private static final char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-	/**
-	 * Generates a random key.
-	 */
-	public static String generateKey() {
-		byte[] bytes = new byte[32];
-		secureRandom.nextBytes(bytes);
-		char[] chars = new char[64];
-		for(int c = 0; c < 32;c++) {
-			byte b = bytes[c];
-			chars[c * 2] = hexChars[(b & 255) >>> 4];
-			chars[c * 2 + 1] = hexChars[b & 15];
-		}
-		return new String(chars);
-	}
+  /**
+   * Generates a random key.
+   */
+  public static String generateKey() {
+    byte[] bytes = new byte[32];
+    secureRandom.nextBytes(bytes);
+    char[] chars = new char[64];
+    for (int c = 0; c < 32;c++) {
+      byte b = bytes[c];
+      chars[c * 2] = hexChars[(b & 255) >>> 4];
+      chars[c * 2 + 1] = hexChars[b & 15];
+    }
+    return new String(chars);
+  }
 
-	/*
-	public static void main(String[] args) {
-		//args = new String[] {"test"};
-		if(args.length==0) {
-			System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
-			System.exit(1);
-		} else {
-			for(String arg : args) {
-				System.out.println(arg+'\t'+hash(arg));
-			}
-		}
-	}
-	 */
+  /*
+  public static void main(String[] args) {
+    //args = new String[] {"test"};
+    if (args.length == 0) {
+      System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
+      System.exit(1);
+    } else {
+      for (String arg : args) {
+        System.out.println(arg+'\t'+hash(arg));
+      }
+    }
+  }
+   */
 }
