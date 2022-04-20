@@ -1,2 +1,6 @@
 # Significant manual code formatting clean-up…
 68ec3002ba928cbd2aca7736e8452ac1d1560236
+# Generics whitespace consistency
+2d46215b793a765890fceb9b9b3ebc50c1cdeae5
+# Indent changed to tabs per current standards.
+be6b608027024a88c26218187ecc3ccf226bd5a4
