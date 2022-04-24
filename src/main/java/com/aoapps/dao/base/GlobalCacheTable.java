@@ -49,10 +49,10 @@ import java.util.TreeSet;
  * TODO: Publish PHP version on PECL
  */
 public abstract class GlobalCacheTable<
-  K extends Comparable<? super K>,
-  R extends Row<K, ?>
+    K extends Comparable<? super K>,
+    R extends Row<K, ?>
 >
-  extends AbstractTable<K, R>
+    extends AbstractTable<K, R>
 {
 
   private final Object unsortedRowsCacheLock = new Object();
@@ -138,7 +138,7 @@ public abstract class GlobalCacheTable<
       }
       R row = rowCache.get(canonicalize(key));
       if (row == null) {
-        throw new NoRowException(getName()+" not found: "+key);
+        throw new NoRowException(getName() + " not found: " + key);
       }
       return row;
     }

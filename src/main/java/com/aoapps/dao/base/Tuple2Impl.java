@@ -32,11 +32,11 @@ import java.util.Comparator;
  * @author  AO Industries, Inc.
  */
 public class Tuple2Impl<
-  C1 extends Comparable<? super C1>,
-  C2 extends Comparable<? super C2>
+    C1 extends Comparable<? super C1>,
+    C2 extends Comparable<? super C2>
 >
-  extends AbstractTuple<Tuple2Impl<C1, C2>>
-  implements
+    extends AbstractTuple<Tuple2Impl<C1, C2>>
+    implements
     Tuple2<C1, C2, Tuple2Impl<C1, C2>>,
     Comparable<Tuple2Impl<C1, C2>>
 {
@@ -52,9 +52,9 @@ public class Tuple2Impl<
 
   @Override
   public Comparable<?>[] getColumns() {
-    return new Comparable<?>[] {
-      column1,
-      column2
+    return new Comparable<?>[]{
+        column1,
+        column2
     };
   }
 

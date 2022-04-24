@@ -45,10 +45,10 @@ import java.util.TreeSet;
  * </ol>
  */
 public abstract class TableCacheTable<
-  K extends Comparable<? super K>,
-  R extends Row<K, ?>
+    K extends Comparable<? super K>,
+    R extends Row<K, ?>
 >
-  extends AbstractTable<K, R>
+    extends AbstractTable<K, R>
 {
 
   protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
@@ -135,7 +135,7 @@ public abstract class TableCacheTable<
     }
     R row = cache.get(canonicalize(key));
     if (row == null) {
-      throw new NoRowException(getName()+" not found: "+key);
+      throw new NoRowException(getName() + " not found: " + key);
     }
     return row;
   }

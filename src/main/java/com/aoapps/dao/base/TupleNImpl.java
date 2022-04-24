@@ -33,10 +33,10 @@ import java.util.Comparator;
  * @author  AO Industries, Inc.
  */
 public class TupleNImpl<
-  C extends Comparable<? super C>
+    C extends Comparable<? super C>
 >
-  extends AbstractTuple<TupleNImpl<C>>
-  implements
+    extends AbstractTuple<TupleNImpl<C>>
+    implements
     TupleN<C, TupleNImpl<C>>,
     Comparable<TupleNImpl<C>>
 {

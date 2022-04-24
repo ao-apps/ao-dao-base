@@ -28,7 +28,7 @@ import com.aoapps.lang.i18n.ThreadLocale;
 import com.aoapps.lang.text.SmartComparator;
 
 public final class SingleReason
-  extends AbstractReason
+    extends AbstractReason
 {
 
   private final String reason;
@@ -51,7 +51,7 @@ public final class SingleReason
     if (!(other instanceof SingleReason)) {
       return null;
     }
-    SingleReason otherSingleReason = (SingleReason)other;
+    SingleReason otherSingleReason = (SingleReason) other;
     // Must have the same reason
     if (reason.equals(otherSingleReason.reason)) {
       return this;
@@ -62,7 +62,7 @@ public final class SingleReason
   @Override
   public int compareTo(Reason other) {
     if (other instanceof SingleReason) {
-      SingleReason otherSingleReason = (SingleReason)other;
+      SingleReason otherSingleReason = (SingleReason) other;
       // Sort by lexical display in current locale
       return new SmartComparator(ThreadLocale.get()).compare(reason, otherSingleReason.reason);
     } else {

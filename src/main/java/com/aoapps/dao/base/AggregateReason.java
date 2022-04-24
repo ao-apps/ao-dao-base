@@ -28,7 +28,7 @@ import com.aoapps.lang.i18n.ThreadLocale;
 import com.aoapps.lang.text.SmartComparator;
 
 public final class AggregateReason
-  extends AbstractReason
+    extends AbstractReason
 {
 
   private final int count;
@@ -48,9 +48,9 @@ public final class AggregateReason
   @Override
   public String toString() {
     if (count == 1) {
-      return singularPrefix+"1"+singularSuffix;
+      return singularPrefix + "1" + singularSuffix;
     }
-    return pluralPrefix+count+pluralSuffix;
+    return pluralPrefix + count + pluralSuffix;
   }
 
   public int getCount() {
@@ -78,13 +78,13 @@ public final class AggregateReason
     if (!(other instanceof AggregateReason)) {
       return null;
     }
-    AggregateReason otherAggregateReason = (AggregateReason)other;
+    AggregateReason otherAggregateReason = (AggregateReason) other;
     // Must have the same text descriptions
     if (
-      singularPrefix.equals(otherAggregateReason.singularPrefix)
-      && pluralPrefix.equals(otherAggregateReason.pluralPrefix)
-      && singularSuffix.equals(otherAggregateReason.singularSuffix)
-      && pluralSuffix.equals(otherAggregateReason.pluralSuffix)
+        singularPrefix.equals(otherAggregateReason.singularPrefix)
+            && pluralPrefix.equals(otherAggregateReason.pluralPrefix)
+            && singularSuffix.equals(otherAggregateReason.singularSuffix)
+            && pluralSuffix.equals(otherAggregateReason.pluralSuffix)
     ) {
       return new AggregateReason(count + otherAggregateReason.count, singularPrefix, pluralPrefix, singularSuffix, pluralSuffix);
     }
@@ -94,12 +94,12 @@ public final class AggregateReason
   @Override
   public int compareTo(Reason other) {
     if (other instanceof AggregateReason) {
-      AggregateReason otherAggregateReason = (AggregateReason)other;
+      AggregateReason otherAggregateReason = (AggregateReason) other;
       // Descending by count first
-      if (count<otherAggregateReason.count) {
+      if (count < otherAggregateReason.count) {
         return 1;
       }
-      if (count>otherAggregateReason.count) {
+      if (count > otherAggregateReason.count) {
         return -1;
       }
       // Sort by lexical display in current locale

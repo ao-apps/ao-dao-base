@@ -39,10 +39,10 @@ import java.util.TreeSet;
  * Caches results on a per-row basis.
  */
 public abstract class RowCacheTable<
-  K extends Comparable<? super K>,
-  R extends Row<K, ?>
+    K extends Comparable<? super K>,
+    R extends Row<K, ?>
 >
-  extends AbstractTable<K, R>
+    extends AbstractTable<K, R>
 {
 
   protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
@@ -128,7 +128,7 @@ public abstract class RowCacheTable<
     if (cache.containsKey(canonicalKey)) {
       R row = cache.get(canonicalKey);
       if (row == null) {
-        throw new NoRowException(getName()+" not found: "+key);
+        throw new NoRowException(getName() + " not found: " + key);
       }
       return row;
     }
@@ -145,7 +145,7 @@ public abstract class RowCacheTable<
       return row;
     } catch (NoRowException err) {
       cache.put(canonicalKey, null);
-      throw new NoRowException(getName()+" not found: "+key, err);
+      throw new NoRowException(getName() + " not found: " + key, err);
     }
   }
 

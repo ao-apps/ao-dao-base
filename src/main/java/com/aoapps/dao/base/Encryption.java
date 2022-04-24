@@ -42,11 +42,11 @@ public final class Encryption {
   // TODO: Use Strings.convertToHex?
   private static String hexEncode(byte[] bytes) {
     int len = bytes.length;
-    StringBuilder sb = new StringBuilder(len*2);
-    for (int c=0; c<len; c++) {
+    StringBuilder sb = new StringBuilder(len * 2);
+    for (int c = 0; c < len; c++) {
       int b = bytes[c];
-      sb.append(hexChars[(b>>4)&0xf]);
-      sb.append(hexChars[b&0xf]);
+      sb.append(hexChars[(b >> 4) & 0xf]);
+      sb.append(hexChars[b & 0xf]);
     }
     return sb.toString();
   }
@@ -85,7 +85,7 @@ public final class Encryption {
     byte[] bytes = new byte[32];
     secureRandom.nextBytes(bytes);
     char[] chars = new char[64];
-    for (int c = 0; c < 32;c++) {
+    for (int c = 0; c < 32; c++) {
       byte b = bytes[c];
       chars[c * 2] = hexChars[(b & 255) >>> 4];
       chars[c * 2 + 1] = hexChars[b & 15];

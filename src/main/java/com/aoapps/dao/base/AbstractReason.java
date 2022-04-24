@@ -30,7 +30,7 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class AbstractReason
-  implements Reason
+    implements Reason
 {
 
   /**
@@ -47,7 +47,7 @@ public abstract class AbstractReason
         reasons.add(newReason);
       } else {
         boolean needAdd = true;
-        for (int c=0; c<size; c++) {
+        for (int c = 0; c < size; c++) {
           AbstractReason merged = reasons.get(c).merge(newReason);
           if (merged != null) {
             reasons.set(c, merged);
@@ -89,16 +89,16 @@ public abstract class AbstractReason
     // TODO: This should use application resources and keys passed-in instead of direct text
     if (dependencies != null) {
       int count = dependencies.size();
-      if (count>0) {
+      if (count > 0) {
         reasons = addReason(
-          reasons,
-          new AggregateReason(
-            count,
-            "Used by ",
-            "Used by ",
-            ' ' + singularName + '.',
-            ' ' + pluralName + "."
-          )
+            reasons,
+            new AggregateReason(
+                count,
+                "Used by ",
+                "Used by ",
+                ' ' + singularName + '.',
+                ' ' + pluralName + "."
+            )
         );
       }
     }

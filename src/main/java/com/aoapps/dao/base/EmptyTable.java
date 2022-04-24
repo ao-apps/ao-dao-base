@@ -37,10 +37,10 @@ import java.util.SortedSet;
  * An empty table does not return any rows and never finds any object.
  */
 public class EmptyTable<
-  K extends Comparable<? super K>,
-  R extends Row<K, ?>
+    K extends Comparable<? super K>,
+    R extends Row<K, ?>
 >
-  implements Table<K, R>
+    implements Table<K, R>
 {
 
   private final Model model;
@@ -76,6 +76,6 @@ public class EmptyTable<
 
   @Override
   public R get(K key) throws NoRowException {
-    throw new NoRowException(getName()+" not found: "+key);
+    throw new NoRowException(getName() + " not found: " + key);
   }
 }

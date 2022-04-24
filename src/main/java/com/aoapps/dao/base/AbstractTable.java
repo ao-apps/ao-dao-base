@@ -37,10 +37,10 @@ import java.util.Set;
 import java.util.SortedMap;
 
 public abstract class AbstractTable<
-  K extends Comparable<? super K>,
-  R extends Row<K, ?>
+    K extends Comparable<? super K>,
+    R extends Row<K, ?>
 >
-  implements Table<K, R>
+    implements Table<K, R>
 {
 
   private final Class<K> keyClass;
@@ -132,7 +132,7 @@ public abstract class AbstractTable<
     @SuppressWarnings("unchecked")
     public Collection<R> values() {
       try {
-        return (Collection<R>)getUnsortedRows();
+        return (Collection<R>) getUnsortedRows();
       } catch (SQLException err) {
         throw new WrappedException(err);
       }

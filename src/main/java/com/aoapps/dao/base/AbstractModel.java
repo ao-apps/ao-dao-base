@@ -31,7 +31,7 @@ import java.util.Comparator;
  * A base implementation of <code>DaoDatabase</code>.
  */
 public abstract class AbstractModel
-  implements Model
+    implements Model
 {
 
   /**

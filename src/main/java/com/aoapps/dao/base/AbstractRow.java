@@ -27,18 +27,18 @@ import com.aoapps.dao.Model;
 import com.aoapps.dao.Row;
 
 public abstract class AbstractRow<
-  K extends Comparable<? super K>,
-  R extends AbstractRow<K, ?> & Comparable<? super R>
+    K extends Comparable<? super K>,
+    R extends AbstractRow<K, ?> & Comparable<? super R>
 >
-  implements Row<K, R>
+    implements Row<K, R>
 {
 
   private final Model model;
   private final Class<R> clazz;
 
   protected AbstractRow(
-    Model model,
-    Class<R> clazz
+      Model model,
+      Class<R> clazz
   ) {
     this.model = model;
     this.clazz = clazz;

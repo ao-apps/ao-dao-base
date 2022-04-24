@@ -32,12 +32,12 @@ import java.util.Comparator;
  * @author  AO Industries, Inc.
  */
 public class Tuple3Impl<
-  C1 extends Comparable<? super C1>,
-  C2 extends Comparable<? super C2>,
-  C3 extends Comparable<? super C3>
+    C1 extends Comparable<? super C1>,
+    C2 extends Comparable<? super C2>,
+    C3 extends Comparable<? super C3>
 >
-  extends AbstractTuple<Tuple3Impl<C1, C2, C3>>
-  implements
+    extends AbstractTuple<Tuple3Impl<C1, C2, C3>>
+    implements
     Tuple3<C1, C2, C3, Tuple3Impl<C1, C2, C3>>,
     Comparable<Tuple3Impl<C1, C2, C3>>
 {
@@ -55,10 +55,10 @@ public class Tuple3Impl<
 
   @Override
   public Comparable<?>[] getColumns() {
-    return new Comparable<?>[] {
-      column1,
-      column2,
-      column3
+    return new Comparable<?>[]{
+        column1,
+        column2,
+        column3
     };
   }
 
