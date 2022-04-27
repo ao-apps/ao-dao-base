@@ -29,4 +29,4 @@ module com.aoapps.dao.base {
   requires static com.aoapps.security; // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
   // Java SE
   requires java.sql;
-}
+} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
