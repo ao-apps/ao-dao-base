@@ -56,13 +56,13 @@ public abstract class GlobalCacheTable<
 {
 
   private final Object unsortedRowsCacheLock = new Object();
-  private Set<? extends R> unsortedRowsCache = null;
+  private Set<? extends R> unsortedRowsCache;
 
   private final Object sortedRowsCacheLock = new Object();
-  private SortedSet<? extends R> sortedRowsCache = null;
+  private SortedSet<? extends R> sortedRowsCache;
 
   private final Object rowCacheLock = new Object();
-  private boolean rowCacheLoaded = false;
+  private boolean rowCacheLoaded;
   private final Map<K, R> rowCache = new HashMap<>();
 
   protected GlobalCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
