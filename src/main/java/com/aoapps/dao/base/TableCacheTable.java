@@ -47,9 +47,7 @@ import java.util.TreeSet;
 public abstract class TableCacheTable<
     K extends Comparable<? super K>,
     R extends Row<K, ?>
->
-    extends AbstractTable<K, R>
-{
+    > extends AbstractTable<K, R> {
 
   protected final ThreadLocal<Set<? extends R>> unsortedRowsCache = new ThreadLocal<>();
 
@@ -102,8 +100,9 @@ public abstract class TableCacheTable<
   /**
    * Called when all rows have been loaded at once.  This allows for subclasses
    * to populate any views or caches.
-   *
+   * <p>
    * This default implementation does nothing.
+   * </p>
    */
   @SuppressWarnings("NoopMethodInAbstractClass")
   protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {

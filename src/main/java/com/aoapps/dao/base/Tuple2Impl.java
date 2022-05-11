@@ -34,16 +34,18 @@ import java.util.Comparator;
 public class Tuple2Impl<
     C1 extends Comparable<? super C1>,
     C2 extends Comparable<? super C2>
->
+    >
     extends AbstractTuple<Tuple2Impl<C1, C2>>
     implements
     Tuple2<C1, C2, Tuple2Impl<C1, C2>>,
-    Comparable<Tuple2Impl<C1, C2>>
-{
+    Comparable<Tuple2Impl<C1, C2>> {
 
   private final C1 column1;
   private final C2 column2;
 
+  /**
+   * Creates a new 2-tuple.
+   */
   public Tuple2Impl(Comparator<? super String> comparator, C1 column1, C2 column2) {
     super(comparator);
     this.column1 = column1;

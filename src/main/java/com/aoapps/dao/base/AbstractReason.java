@@ -29,9 +29,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractReason
-    implements Reason
-{
+/**
+ * Base for {@link Reason} implementations.
+ */
+public abstract class AbstractReason implements Reason {
 
   /**
    * Merges a single reason, if not null.

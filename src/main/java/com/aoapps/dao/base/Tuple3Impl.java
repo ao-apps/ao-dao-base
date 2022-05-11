@@ -35,17 +35,19 @@ public class Tuple3Impl<
     C1 extends Comparable<? super C1>,
     C2 extends Comparable<? super C2>,
     C3 extends Comparable<? super C3>
->
+    >
     extends AbstractTuple<Tuple3Impl<C1, C2, C3>>
     implements
     Tuple3<C1, C2, C3, Tuple3Impl<C1, C2, C3>>,
-    Comparable<Tuple3Impl<C1, C2, C3>>
-{
+    Comparable<Tuple3Impl<C1, C2, C3>> {
 
   private final C1 column1;
   private final C2 column2;
   private final C3 column3;
 
+  /**
+   * Creates a new 3-tuple.
+   */
   public Tuple3Impl(Comparator<? super String> comparator, C1 column1, C2 column2, C3 column3) {
     super(comparator);
     this.column1 = column1;

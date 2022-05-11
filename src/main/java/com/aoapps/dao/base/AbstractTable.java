@@ -36,12 +36,13 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
 
+/**
+ * Base for {@link Table} implementations.
+ */
 public abstract class AbstractTable<
     K extends Comparable<? super K>,
     R extends Row<K, ?>
->
-    implements Table<K, R>
-{
+    > implements Table<K, R> {
 
   private final Class<K> keyClass;
   private final Class<R> rowClass;

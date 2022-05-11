@@ -27,9 +27,10 @@ import com.aoapps.dao.Reason;
 import com.aoapps.lang.i18n.ThreadLocale;
 import com.aoapps.lang.text.SmartComparator;
 
-public final class SingleReason
-    extends AbstractReason
-{
+/**
+ * A {@link Reason} with a single cause.
+ */
+public final class SingleReason extends AbstractReason {
 
   private final String reason;
 

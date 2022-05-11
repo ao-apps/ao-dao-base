@@ -34,9 +34,7 @@ import java.util.Comparator;
  */
 public abstract class AbstractTuple<
     T extends AbstractTuple<T> & Comparable<? super T>
->
-    implements Tuple<T>
-{
+    > implements Tuple<T> {
 
   private final Comparator<? super String> comparator;
 

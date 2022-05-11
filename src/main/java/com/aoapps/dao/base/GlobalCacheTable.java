@@ -51,9 +51,7 @@ import java.util.TreeSet;
 public abstract class GlobalCacheTable<
     K extends Comparable<? super K>,
     R extends Row<K, ?>
->
-    extends AbstractTable<K, R>
-{
+    > extends AbstractTable<K, R> {
 
   private final Object unsortedRowsCacheLock = new Object();
   private Set<? extends R> unsortedRowsCache;
@@ -103,8 +101,9 @@ public abstract class GlobalCacheTable<
   /**
    * Called when all rows have been loaded at once.  This allows for subclasses
    * to populate any views or caches.
-   *
+   * <p>
    * This default implementation does nothing.
+   * </p>
    */
   @SuppressWarnings("NoopMethodInAbstractClass")
   protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {

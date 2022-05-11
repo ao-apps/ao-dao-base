@@ -26,12 +26,13 @@ package com.aoapps.dao.base;
 import com.aoapps.dao.Model;
 import com.aoapps.dao.Row;
 
+/**
+ * Base for {@link Row} implementations.
+ */
 public abstract class AbstractRow<
     K extends Comparable<? super K>,
     R extends AbstractRow<K, ?> & Comparable<? super R>
->
-    implements Row<K, R>
-{
+    > implements Row<K, R> {
 
   private final Model model;
   private final Class<R> clazz;

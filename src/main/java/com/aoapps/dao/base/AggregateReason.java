@@ -27,9 +27,10 @@ import com.aoapps.dao.Reason;
 import com.aoapps.lang.i18n.ThreadLocale;
 import com.aoapps.lang.text.SmartComparator;
 
-public final class AggregateReason
-    extends AbstractReason
-{
+/**
+ * A {@link Reason} with a multiple causes.
+ */
+public final class AggregateReason extends AbstractReason {
 
   private final int count;
   private final String singularPrefix;

@@ -34,15 +34,17 @@ import java.util.Comparator;
  */
 public class TupleNImpl<
     C extends Comparable<? super C>
->
+    >
     extends AbstractTuple<TupleNImpl<C>>
     implements
     TupleN<C, TupleNImpl<C>>,
-    Comparable<TupleNImpl<C>>
-{
+    Comparable<TupleNImpl<C>> {
 
   private final C[] columns;
 
+  /**
+   * Creates a new n-tuple.
+   */
   @SafeVarargs
   // Java 1.8 compiler still giving warning even with @SafeVarargs
   @SuppressWarnings({"unchecked", "varargs"})
