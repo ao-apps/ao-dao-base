@@ -28,7 +28,7 @@ def upstreamProjects = [
   '../parent', // <groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId>
 
   // Direct
-  '../dao/api', // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
+  'api', // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
   '../dbc', // <groupId>com.aoapps</groupId><artifactId>ao-dbc</artifactId>
   '../lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   '../security', // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
