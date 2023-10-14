@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -70,12 +70,14 @@ public abstract class AbstractTable<
     public boolean containsValue(Object value) {
       if (value != null && rowClass.isInstance(value)) {
         try {
+          // TODO: getOptional
           R row = AbstractTable.this.get(rowClass.cast(value).getKey());
           if (row == null) {
             throw new AssertionError();
           }
           return true;
         } catch (NoRowException err) {
+          // TODO: getOptional
           return false;
         } catch (SQLException err) {
           throw new WrappedException(err);
@@ -89,12 +91,14 @@ public abstract class AbstractTable<
     public R get(Object key) {
       if (key != null && keyClass.isInstance(key)) {
         try {
+          // TODO: getOptional
           R row = AbstractTable.this.get(keyClass.cast(key));
           if (row == null) {
             throw new AssertionError("NoRowException should have been thrown");
           }
           return row;
         } catch (NoRowException err) {
+          // TODO: getOptional
           return null;
         } catch (SQLException err) {
           throw new WrappedException(err);

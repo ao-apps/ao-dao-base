@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2016, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2016, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -76,4 +76,6 @@ public class EmptyTable<
   public R get(K key) throws NoRowException {
     throw new NoRowException(getName() + " not found: " + key);
   }
+
+  // TODO: getOptional
 }
