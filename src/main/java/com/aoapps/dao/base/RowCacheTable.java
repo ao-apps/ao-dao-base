@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -101,9 +101,8 @@ public abstract class RowCacheTable<
   /**
    * Called when all rows have been loaded at once.  This allows for subclasses
    * to populate any views or caches in a more efficient manner than row-by-row.
-   * <p>
-   * This default implementation does nothing.
-   * </p>
+   *
+   * <p>This default implementation does nothing.</p>
    */
   @SuppressWarnings("NoopMethodInAbstractClass")
   protected void allRowsLoaded(Set<? extends R> rows) throws SQLException {
