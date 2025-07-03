@@ -22,7 +22,7 @@ Simple data access objects framework base for implementations.
 * [Project Home](https://oss.aoapps.com/dao/base/)
 * [Changelog](https://oss.aoapps.com/dao/base/changelog)
 * [API Docs](https://oss.aoapps.com/dao/base/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-dao-base)
+* [Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-dao-base)
 * [GitHub](https://github.com/ao-apps/ao-dao-base)
 
 ## Contact Us
