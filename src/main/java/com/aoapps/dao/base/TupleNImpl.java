@@ -48,7 +48,7 @@ public class TupleNImpl<
   @SafeVarargs
   // Java 1.8 compiler still giving warning even with @SafeVarargs
   @SuppressWarnings({"unchecked", "varargs"})
-  public TupleNImpl(Comparator<? super String> comparator, C ... columns) {
+  public TupleNImpl(Comparator<? super String> comparator, C... columns) {
     super(comparator);
     this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
   }

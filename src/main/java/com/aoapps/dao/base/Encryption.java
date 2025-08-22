@@ -95,7 +95,7 @@ public final class Encryption {
 
   /*
   public static void main(String[] args) {
-    //args = new String[] {"test"};
+    // args = new String[] {"test"};
     if (args.length == 0) {
       System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
       System.exit(1);

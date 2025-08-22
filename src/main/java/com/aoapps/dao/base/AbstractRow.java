@@ -85,7 +85,7 @@ public abstract class AbstractRow<
    * The default ordering is based on key comparison.  If both keys
    * are Strings, will use {@linkplain Model#getComparator() the model comparator}.
    */
-  //@Override
+  // @Override
   public int compareTo(R o) {
     K key1 = getKey();
     K key2 = o.getKey();
