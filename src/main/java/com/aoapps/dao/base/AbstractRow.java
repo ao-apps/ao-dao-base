@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2020, 2021, 2022, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -25,6 +25,7 @@ package com.aoapps.dao.base;
 
 import com.aoapps.dao.Model;
 import com.aoapps.dao.Row;
+import com.aoapps.dao.Table;
 
 /**
  * Base for {@link Row} implementations.
@@ -55,6 +56,11 @@ public abstract class AbstractRow<
 
   /**
    * The default hashCode is based on the key value.
+   *
+   * <p>Note: This hash code is only consistent with {@link AbstractRow#equals(java.lang.Object)}
+   * when this row is {@linkplain Table#canonicalize(java.lang.Comparable) canonical}.</p>
+   *
+   * @see Table#canonicalize(java.lang.Comparable)
    */
   @Override
   public int hashCode() {
