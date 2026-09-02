@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016, 2019, 2020, 2021, 2022, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -93,17 +93,15 @@ public final class Encryption {
     return new String(chars);
   }
 
-  /*
-  public static void main(String[] args) {
-    // args = new String[] {"test"};
-    if (args.length == 0) {
-      System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
-      System.exit(1);
-    } else {
-      for (String arg : args) {
-        System.out.println(arg+'\t'+hash(arg));
-      }
-    }
-  }
-   */
+  // public static void main(String[] args) {
+  //   // args = new String[] {"test"};
+  //   if (args.length == 0) {
+  //     System.err.println("usage: "+Encryption.class.getName()+" plaintext ...");
+  //     System.exit(1);
+  //   } else {
+  //     for (String arg : args) {
+  //       System.out.println(arg+'\t'+hash(arg));
+  //     }
+  //   }
+  // }
 }
