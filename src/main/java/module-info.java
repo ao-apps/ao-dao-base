@@ -1,6 +1,6 @@
 /*
  * ao-dao-base - Simple data access objects framework base for implementations.
- * Copyright (C) 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2021, 2022, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,7 +21,6 @@
  * along with ao-dao-base.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.dao.base {
-  exports com.aoapps.dao.base;
   // Direct
   requires com.aoapps.dao.api; // <groupId>com.aoapps</groupId><artifactId>ao-dao-api</artifactId>
   requires com.aoapps.dbc; // <groupId>com.aoapps</groupId><artifactId>ao-dbc</artifactId>
@@ -29,4 +28,6 @@ module com.aoapps.dao.base {
   requires static com.aoapps.security; // <groupId>com.aoapps</groupId><artifactId>ao-security</artifactId>
   // Java SE
   requires java.sql;
+
+  exports com.aoapps.dao.base;
 }
